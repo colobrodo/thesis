@@ -19,4 +19,13 @@
         \subsection{Gestione interattiva dei file stageati}         
         \subsection{Modalità compatta}
         \subsection{Navigazione}
+            E\'  disponibile un metodo di navigazione per aumentare l'usabilità dell'applicazione.
+            Durante la navigazione è possibile rendere un test \textit{focussed} e effettuare operazioni (come nasconderlo o metterlo in stage) usando delle scorciatoie da tastiera.\\
+            Si può spostare il focus sul test precedente e successivo sempre usando shortcuts.
+            Solo un test può essere in focus.\\
+            Quando il focus si sposta su un nuovo test la pagina effettua un operazione di scroll per renderlo visibile e scrive il suo nome nell'url, nella sezione denominata \textit{fragment}.\\
+            Se la pagina viene richiesta con un fragment già impostato, in fase di rendering dei tests viene focussato automaticamente il test con quel nome (e quindi incluso nella sezione visibile della pagina).\\
+            Questo consente agli utenti di condividere un test trammite url.
+
+            TODO: immagine test navigazione e url con fragment
     \section{Interazione con gli altri tool aziendali}
