@@ -1,0 +1,53 @@
+\chapter{Backend}
+        Il backend è stato sviluppato in \href{https://www.python.org}{Python} usando il framework \href{https://flask.palletsprojects.com/en/1.1.x/}{Flask}.
+        \'E stato scelto Python perchè è un linguaggio già usato internamente per lo sviluppo di plugin e tool interni.
+
+        \section{Specifica e documentazione}
+            Prima della fase di sviluppo è stata predisposto un periodo di design dell' API.
+            Questo processo ha prodotto un file di specifica (descritta nel paragrafo 
+            \ref{openapi}).\\\\
+            Questa fase preliminare allo sviluppo è durata circa una settimana ed è servita per 
+            individuare difficoltà tecniche in modo preliminare che sono sate discusse con il team.
+            Risparmiando così tempo in corso di sviluppo, evitando di dover ristrutturare l'applicazione.
+            Questa specifica come vedremo in seguito è servita anche a produrre automaticamente una pagina di documentazione (\ref{apidoc}).
+                
+            \subsection{Specifica in linguaggio OpenAPI\label{openapi}}
+                La Specifica dell'API è stata scritta in formato OpenAPI.
+                Questo file può essere scritto in linguaggio JSON o YML, io ho scelto il secondo perchè
+                sintatticamente più leggero e usa l'indentazione per separare le sezioni, facilitandone dunque la scrittura. 
+                Questo formato ci consente di descrivere tutte le chiamate che il server 
+                mette a disposizione, specificando:
+                \begin{itemize}
+                    \item il formato dell'URI 
+                    \item il metodo
+                    \item il formato di interscampio dei dati (json, xml ecc) 
+                    \item la struttura del response 
+                    \item come deve essere strutturato il body perchè la richiesta sia valida
+                    \item i codici di errori e la loro semantica specifica nel contesto dell'applicazione
+                \end{itemize}
+                
+            \subsection{Documentazione\label{apidoc}}
+                Inoltre da questa specifica è possibile generare la documentazione, in pagina statica html,
+                tramite l'utilizzo di diverse cli.
+                Io ho scelto ReDoc, perchè mette a disposizione diverse vendore-extension, cioè sezioni che
+                se specificate provedono una maggiore customizzazione della pagina generata, come sezioni di codici disposizione
+                esempio per effettuare una determinata chiamata al server.
+                Oppure aggiungere riferimenti a file markdown esterni da includere nella documentazione.
+                
+            \subsection{Continous integration}
+                Il processo di scrittura della documentazione è stato aggiunto a una pipeline di CI
+                \footnote{\textbf{Continous Integration} - L'integrazione continua consiste nell'integrare gli ambienti di sviluppo dei diversi sviluppatori tramite processi di build, testing ecc... eseguiti da un server condiviso}.
+                Questo processo si occupa, solo se il file .yml di specifica viene modificato, di 
+                rigenerare il file html di documentazione.
+                Questo file viene successivamente servito in modo da rendere la documentazione 
+                disponibile online e sempre aggiornata con le specifiche.
+
+    \section{Tecnologie Utilizzate}  
+        \subsection{Python}  
+        \subsection{Flask}  
+
+    \section{Implementazione interna}
+        \subsection{Interazione con i sistemi di controllo di versione}
+    
+    \section{Bundling dell'applicazione e deploy}
+              

@@ -1,0 +1,96 @@
+\documentclass[a4paper,12pt,twoside]{report}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{setspace}
+\usepackage[paper=a4paper,margin=1in]{geometry}
+\usepackage[italian]{babel}
+\usepackage{fancyhdr}
+
+\title{Tesi skskss}
+\author{Davide Cologni}
+
+\pagestyle{fancy}
+\setlength{\headsep}{0.35in}
+\let\MakeUppercase\relax
+\renewcommand\sectionmark[1]{}
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3}
+
+\makeatletter
+\let\inserttitle\@title
+\let\insertauthor\@author
+\makeatother
+
+\begin{document}
+    
+    \begin{titlepage}
+        
+        \noindent
+        \begin{minipage}[t]{0.19\textwidth}
+            \vspace{-4mm}{\includegraphics[scale=1.15]{logo_unimib.pdf}}
+        \end{minipage}
+        \begin{minipage}[t]{0.81\textwidth}
+        {
+                {\textsc{Università degli Studi di Milano - Bicocca}} \\
+                \textbf{Scuola di Scienze} \\
+                \textbf{Dipartimento di Informatica, Sistemistica e Comunicazione} \\
+                \textbf{Corso di laurea in Informatica} \\
+                \par
+        }
+        \end{minipage}
+        
+	\vspace{40mm}
+        
+	\begin{center}
+            {\LARGE{
+                    \textbf{\inserttitle}
+                    \par
+            }}
+        \end{center}
+        
+        \vspace{50mm}
+
+        \noindent
+        {\large \textbf{Relatore:} Prof. Gainluca Della Vedova } \\
+
+        \noindent
+        {\large \textbf{Correlatore:} Dott. Antonio Riva}
+        
+        \vspace{15mm}
+
+        \begin{flushright}
+            {\large \textbf{Relazione della prova finale di:}} \\
+            \large{\insertauthor} \\
+            \large{Matricola 830177} 
+        \end{flushright}
+        
+        \vspace{40mm}
+        \begin{center}
+            {\large{\bf Anno Accademico 2020-2021}}
+        \end{center}
+        
+        \restoregeometry
+        
+    \end{titlepage}
+
+    \tableofcontents
+    
+    \input{chapters/Introduction.tex}
+
+    \input{chapters/Sistema_di_testing.tex}
+
+    \input{chapters/Struttura_dell_applicazione.tex}
+
+    \input{chapters/Frontend.tex}
+    
+    \input{chapters/Backend.tex}
+    
+    \input{chapters/Uso_nel_processo_di_sviluppo.tex}
+    
+    \input{chapters/Sviluppi_futuri.tex}
+
+    \input{chapters/Conclusione.tex}
+\end{document}
+            
