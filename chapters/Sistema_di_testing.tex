@@ -10,11 +10,11 @@
         consistente con la sua versione precedente.
         Nel caso questo comportamento voglia essere esplicitamente cambiato, viene modificato il test.
 
-        Nel nostro sistema l'output aspettato è salvato in file .reference e il risultato prodotto
-        dal test in un file current.
+        Nel nostro sistema l'output aspettato è salvato in file \textit{.reference} e il risultato prodotto
+        dal test in un file \textit{.current}.
         Il file current viene salvato nel file system solo se effettivamente diverso dal suo riferimento.
         
-        Salvare il nuovo stato può consentire allo sviluppatore di confrontare i due file per capire quale sia l'errore introdotto nel software. \newline
+        Salvare il nuovo stato può consentire allo sviluppatore di confrontare i due file per capire quale sia l'errore introdotto nel software. \\
         Nella sezione successiva viene illustrato da quali elementi è composto un test e quale sia la loro funzione.
     \section{Anatomia di un test\label{testanatomy}}
         Un test consiste in un insieme di file locati per comodit\'a nella stessa cartella. 
@@ -22,7 +22,7 @@
         Ogni test consiste in:
         \begin{itemize}
             \item un file CAD di partenza
-            \item dei file per specificare una configurazione cliente
+            \item dei file per specificare una configurazione specifica di un cliente
             \item un file scl (linguaggio di scripting proprietario) o un file python
             \item un riferimento (file .reference)
         \end{itemize}
@@ -31,10 +31,10 @@
         Successivamente esegue lo script SCL o Python, che con opportune librerie, si interfaccia al software
         e simula le operazioni utente. 
         
-        Una volta reminate queste operazioni il test salva il suo stato in un file e lo confronta con la sua reference 
+        Una volta terminate queste operazioni il test salva il suo stato in un file e lo confronta con la sua reference 
         salvata nella cache del test. 
 
-        Se la reference coincide il file di stato questo, viene eliminato, altrimenti viene salvato.
+        Se il file prodotto dalle operazioni \'e uguale all'oracolo aspettato, questo file viene rimosso dal file system, altrimenti il test \'e in errore e l'output viene lasciato disponibile per il confronto.
 
     \section{Integrazione nel Workflow}
         \subsection{Fase Preliminare di sviluppo}
@@ -46,12 +46,13 @@
             ma le modifiche del software già compilate (sostituendo l’exe o una libreria dinamica .dll) 
             vengono caricate su un server dedicato che eseguirà ogni test della test suite.
             
+            Se i test passano la modifica al software viene committata, e resa disponibile agli altri sviluppatori.
             
             Anche per questo motivo lo sviluppatore non interagisce sui singoli casi di test da file system,
-            ma per elencare i test fallimentari, confrontarli e committare eventuali cambiamenti, usa un report dinamico, 
+            ma per elencare i test fallimentari, confrontarli e committare eventuali cambiamenti nelle references, usa un report dinamico, 
             proprietario, oggetto di questa tesi.
     \section{Versioning dei tests}
         I test si trovano sotto un sistema di versioning.
         Quando uno sviluppatore decide di cambiare il comportamento in un caso d'uso o aggiungere una funzionalità,
         modificher\'a o creer\'a rispettivamente un test.
-        Esso verrà committato nel sistema di versioning in modo che gli altri sviluppatori possano testare il software secondo le nuove specifiche definite dal test.
+        Esso verrà committato nel sistema di versioning in modo che gli altri sviluppatori possano testare il software secondo le nuove specifiche definite dal test.         
