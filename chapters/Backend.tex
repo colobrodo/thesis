@@ -43,11 +43,24 @@
                 disponibile online e sempre aggiornata con le specifiche.
 
     \section{Tecnologie Utilizzate}  
-        \subsection{Python}  
+        \subsection{Python}
+            Python \'e un linguaggio di scripting, interpretato ad alto livello, ovvero la gestione della memoria viene effettuata da un sistema di garbage collection e non delegata allo sviluppatore.
+            L'uso di python è dovuto al fatto che \'e un linguaggio gi\'a usato per lo scripting all'interno dell'applicazione e dunque gi\'a familiare a motli sviluppatori.
+            Tra le varie librerie prodotte \'e presente anche un modulo per lanciare i test e inviare i risultati agli sviluppatori via e-mail.
+            Questo modulo non è stato utilizzato all'interno del test report l'uso dello stesso linguaggio ha contribuito a mantenere la code-base pi\'u uniforme.
         \subsection{Flask}  
+            Flask \'e un \textit{micro}Framework per la creazione di servizi web, esso consente di creare applicazioni complete o API (come nel nostro caso)
+            La sua peculiarit\'a \'e la sua minimalit\'a e consente si scrivere applicazioni in modo rapido riducendo al minimo la parte di codice che si occupa della gestione dell'interfaccia HTTP, usando gli strumenti di introsprezione del codice offerti dal linguaggio come i decoratori.
+            Esso \'e stato scelto perch\'e l'applicazione non necessitava di gestioni di basso livello riguardo la comunicazione di rete, ma la parte pi\'u importante dell'applicazione era l'attraversamento del file system per collezionare le informazioni riguardo ai test e l'interfaccia con i sistemi di versioning.
 
     \section{Implementazione interna}
         \subsection{Interazione con i sistemi di controllo di versione}
+                
+            TODO: dire che quando i test sono committati la stage e l'implementazione della stage per svn.
+
+            Tutte le azioni effettuate dal report sono operazioni sul file system dunque sono completamente reversibili, e esse non sono definitive fino a quando non viene espressamente effettuato un commit.\\
+            Una specifica del report \'e poter usare sia \textbf{Git} e \textbf{Svn (Subversion)} in modo trasparente allo sviluppatore.
+            Questo perch\'e in futuro si prevede di migrare la suite di test sa Subversion a Git.
     
     \section{Bundling dell'applicazione e deploy}
               
