@@ -36,10 +36,16 @@
 
         Se il file prodotto dalle operazioni \'e uguale all'oracolo aspettato, questo file viene rimosso dal file system, altrimenti il test \'e in errore e l'output viene lasciato disponibile per il confronto.
 
+    \section{Versioning dei tests}
+            I test si trovano sotto un sistema di versioning.
+            Quando uno sviluppatore decide di cambiare il comportamento in un caso d'uso o aggiungere una funzionalità,
+            modificher\'a o creer\'a rispettivamente un test.
+            Esso verrà committato nel sistema di versioning in modo che gli altri sviluppatori possano testare il software secondo le nuove specifiche definite dal test.    
+            
     \section{Integrazione nel Workflow}
         \subsection{Fase Preliminare di sviluppo}
             I test sono suddivisi in caso d'uso quindi, per la maggior parte dei casi, lo sviluppatore sa quali test controlleranno la correttezza della sua modifica.
-            
+            Lo sviluppatore eseguirà in locale quindi solo un sottoinsieme di test per avere una conferma preliminare della correttezza dello sviluppo. 
         \subsection{Server di testing}
             Essendo la test suite molto grossa e il processo di testing molto dispendioso, 
             la sessione di test viene lanciata, non in locale dal singolo sviluppatore, 
@@ -51,8 +57,7 @@
             Anche per questo motivo lo sviluppatore non interagisce sui singoli casi di test da file system,
             ma per elencare i test fallimentari, confrontarli e committare eventuali cambiamenti nelle references, usa un report dinamico, 
             proprietario, oggetto di questa tesi.
-    \section{Versioning dei tests}
-        I test si trovano sotto un sistema di versioning.
-        Quando uno sviluppatore decide di cambiare il comportamento in un caso d'uso o aggiungere una funzionalità,
-        modificher\'a o creer\'a rispettivamente un test.
-        Esso verrà committato nel sistema di versioning in modo che gli altri sviluppatori possano testare il software secondo le nuove specifiche definite dal test.         
+
+            Il processo di esecuzione dei test sul server \'e delegato a uno script dedicato che si occupa di ottenere lo stato corrente dei test da controllo di versione,
+            eseguire la suite su un istanza del programma, in seguito leggerne i log e notificare gli sviluppatori con una e-mail.
+            Questa email conterr\'a delle informazioni preliminari, come il numero di test falliti e il tempo di esecuzione totale, e un link al report dettagliato.
