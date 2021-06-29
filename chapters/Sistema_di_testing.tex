@@ -2,62 +2,64 @@
     \section{Meccanismo dell'oracolo\label{oracolo}}
         Nel flusso di sviluppo attuale vi è una fase di test di integrazione.
         Per la verifica del test viene sfruttato il meccanismo dell’oracolo.
-        Esso consiste in accoppiare ogni test all'output aspettato (chiamato appunto oracolo),
-        e successivamente effettuare un confronto tra il risultato del test e il suo riferimento.
-        Il test viene dichiarato fallimentare se ci sono differenze tra questi outcome.
+        Esso consiste nell'accoppiare ogni test all'output corrispondente (chiamato appunto oracolo)
+        e successivamente nell'effettuare un confronto tra il risultato del test e il suo riferimento.
+        Il test viene dichiarato fallimentare se ci sono differenze tra gli outcome.
         
-        L'idea è che ogni test rappresenti un caso d'uso, e il software deve mantenere un comportamento 
-        consistente con la sua versione precedente.
-        Nel caso questo comportamento voglia essere esplicitamente cambiato, viene modificato il test.
+        La particolarit\'a del meccanismo sta nella facolt\'a del test di riferirsi ad un unica funzionalit\'a o ad un insieme di esse strettamente correlate tra loro.
+        Questo consente allo sviluppatore di individuare eventuali errori con maggiore precisione nel caso in cui il test fallisca. 
+        Se vi fosse la necessit\'a di cambiare le specifiche del software o di aggiungerne funzionalit\'a, \'e possibile rispettivamente modificare un oracolo esistente o crearne uno nuovo. 
 
-        Nel nostro sistema l'output aspettato è salvato in file \textit{.reference} e il risultato prodotto
+        Nel nostro sistema l'oracolo è salvato in un file \textit{.reference} e il risultato prodotto
         dal test in un file \textit{.current}.
-        Il file current viene salvato nel file system solo se effettivamente diverso dal suo riferimento.
+        Il file current viene salvato nel file system solo nel caso in cui esso sia effettivamente diverso dal suo riferimento.
         
         Salvare il nuovo stato può consentire allo sviluppatore di confrontare i due file per capire quale sia l'errore introdotto nel software. \\
-        Nella sezione successiva viene illustrato da quali elementi è composto un test e quale sia la loro funzione.
+        Nella sezione successiva vengono illustrati gli elementi dal quale \'e composto un test e in seguito la loro funzione.
     \section{Anatomia di un test\label{testanatomy}}
         Un test consiste in un insieme di file locati per comodit\'a nella stessa cartella. 
 
         Ogni test consiste in:
         \begin{itemize}
             \item un file CAD di partenza
-            \item dei file per specificare una configurazione specifica di un cliente
+            \item dei file per descrivere una configurazione specifica di un determinato cliente
             \item un file scl (linguaggio di scripting proprietario) o un file python
             \item un riferimento (file .reference)
         \end{itemize}
     \section{Ciclo di vita del test}
         Il software, per lanciare un test, importa il file CAD e le configurazioni clienti.
-        Successivamente esegue lo script SCL o Python, che con opportune librerie, si interfaccia al software
+        Successivamente esegue lo script SCL o Python, che con opportune librerie, si interfaccia con il software
         e simula le operazioni utente. 
         
-        Una volta terminate queste operazioni il test salva il suo stato in un file e lo confronta con la sua reference 
+        Una volta terminate le operazioni, il test salva il suo stato in un file e lo confronta con la sua reference 
         salvata nella cache del test. 
 
-        Se il file prodotto dalle operazioni \'e uguale all'oracolo aspettato, questo file viene rimosso dal file system, altrimenti il test \'e in errore e l'output viene lasciato disponibile per il confronto.
+        Se il file prodotto dalle operazioni \'e uguale all'oracolo, esso viene rimosso dal file system.
+        In caso contrario il test \'e in stato di errore e l'output resta disponibile per un confronto.
 
     \section{Versioning dei tests}
             I test si trovano sotto un sistema di versioning.
-            Quando uno sviluppatore decide di cambiare il comportamento in un caso d'uso o aggiungere una funzionalità,
-            modificher\'a o creer\'a rispettivamente un test.
+            Quando uno sviluppatore decide di cambiare il comportamento di un caso d'uso o di aggiungere una funzionalità al software,
+            sar\'a necessario modificare o creare un test.
             Esso verrà committato nel sistema di versioning in modo che gli altri sviluppatori possano testare il software secondo le nuove specifiche definite dal test.    
             
     \section{Integrazione nel Workflow}
         \subsection{Fase Preliminare di sviluppo}
-            I test sono suddivisi in caso d'uso quindi, per la maggior parte dei casi, lo sviluppatore sa quali test controlleranno la correttezza della sua modifica.
-            Lo sviluppatore eseguirà in locale quindi solo un sottoinsieme di test per avere una conferma preliminare della correttezza dello sviluppo. 
+            I test sono suddivisi in caso d'uso.
+            Pertanto, nella la maggior parte dei casi, lo sviluppatore riconosce i test che controlleranno la correttezza della sua modifica.
+            in seguito verr\'a eseguito in locale solo un sottoinsieme di test al fine di ottenere una conferma preliminare della correttezza dello sviluppo. 
         \subsection{Server di testing}
-            Essendo la test suite molto grossa e il processo di testing molto dispendioso, 
-            la sessione di test viene lanciata, non in locale dal singolo sviluppatore, 
-            ma le modifiche del software già compilate (sostituendo l’exe o una libreria dinamica .dll) 
-            vengono caricate su un server dedicato che eseguirà ogni test della test suite.
+            Essendo la test suite molto ampia e il processo di testing molto dispendioso computazionalmente, 
+            la sessione di test non viene lanciata in locale dal singolo sviluppatore, 
+            Bens\'i  le modifiche del software già precedentemente compilate (sostituendo l’exe o una libreria dinamica .dll) 
+            vengono caricate su un server apposito, il quale eseguir\'a ogni test della test suite.
             
-            Se i test passano la modifica al software viene committata, e resa disponibile agli altri sviluppatori.
+            Nel caso in cui non ci siano test in stato di errore, la modifica al software viene committata e resa disponibile agli altri sviluppatori.
             
-            Anche per questo motivo lo sviluppatore non interagisce sui singoli casi di test da file system,
-            ma per elencare i test fallimentari, confrontarli e committare eventuali cambiamenti nelle references, usa un report dinamico, 
+            Anche per questo motivo lo sviluppatore non interagisce direttamente sui singoli casi di test da file system,
+            ma al fine di elencare i test fallimentari, di confrontarli e di committare eventuali cambiamenti negli oracoli, usa un report dinamico, 
             proprietario, oggetto di questa tesi.
 
-            Il processo di esecuzione dei test sul server \'e delegato a uno script dedicato che si occupa di ottenere lo stato corrente dei test da controllo di versione,
-            eseguire la suite su un istanza del programma, in seguito leggerne i log e notificare gli sviluppatori con una e-mail.
-            Questa email conterr\'a delle informazioni preliminari, come il numero di test falliti e il tempo di esecuzione totale, e un link al report dettagliato.
+            Il processo di esecuzione dei test sul server \'e delegato a uno script specifico, il quale si occupa di scaricare nuovamente i test da sistema di controllo di versione.
+            Il programma sucessivamente lancia la suite su un'istanza del programma, per poi leggerne i file di log e notificare gli sviluppatori con una e-mail.
+            Questa email conterr\'a delle informazioni preliminari, come il numero di test falliti, il tempo di esecuzione totale e un link al report dettagliato.
