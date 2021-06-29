@@ -63,4 +63,11 @@
             Questo perch\'e in futuro si prevede di migrare la suite di test sa Subversion a Git.
     
     \section{Bundling dell'applicazione e deploy}
-              
+        TODO: Spiegare come l'ho messo sul server
+
+        In produzione l'applicazione serve l'API e il frontend sulla stessa porta.
+        Questo è stato fatto separando il metodo di risoluzione delle root in due, per prima gli indirizzi che iniziano con \textit{v1/} contengono gli end-point del frontend
+        Gli altri indirizzi si occupano di servire il frontend, essi son stati a loro volta suddivisi:
+        I file statici (detti assets) e le route della Single Page Application.
+        Se il percorso coincide con uno presente nella cartella \textit{static} viene servito il file trammite HTTP
+        Altrimenti viene servito il file HTML index che essendo una single page application si occuper\'a di reindirizzare l'utente sulla pagina richiesta o di segnalare errore
