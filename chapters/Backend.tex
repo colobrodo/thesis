@@ -52,16 +52,17 @@
             Flask \'e un \textit{micro}Framework per la creazione di servizi web, esso consente di creare applicazioni complete o API (come nel nostro caso)
             La sua peculiarit\'a \'e la sua minimalit\'a e consente si scrivere applicazioni in modo rapido riducendo al minimo la parte di codice che si occupa della gestione dell'interfaccia HTTP, usando gli strumenti di introsprezione del codice offerti dal linguaggio come i decoratori.
             Esso \'e stato scelto perch\'e l'applicazione, essendo destinata all'uso interno, non necessitava di gestioni di rete di basso livello.
-            L'attenzione principale \'e stata invece posta sulla riusabilità dell'API. TODO: dire altro???
+            L'attenzione principale \'e stata invece posta sulla riusabilità dell'API.
 
     \section{Implementazione interna}
         \subsection{Interazione con i sistemi di controllo di versione}
                 
-            TODO: dire che quando i test sono committati la stage e l'implementazione della stage per svn.
-
-            Tutte le azioni effettuate dal report sono operazioni sul file system dunque sono completamente reversibili, e esse non sono definitive fino a quando non viene espressamente effettuato un commit.\\
+            Tutte le azioni effettuate dal report sono operazioni sul file system che vengono successivamente registrate in un sistema di controllo di versione.
+            Il risultato delle azioni performate vengono salvate in un area di stage (o pre-commit).
+            Questo rende le operazioni completamente reversibili e le modifiche non vengono rese effettive fino a quando non viene creato un commit e viene revisionato.\\
             Una specifica del report \'e poter usare sia \textbf{Git} e \textbf{Svn (Subversion)} in modo trasparente allo sviluppatore.
             Questo perch\'e in futuro si prevede di migrare la suite di test sa Subversion a Git.
+            
     
     \section{Bundling dell'applicazione e deploy}
         TODO: Spiegare come l'ho messo sul server
