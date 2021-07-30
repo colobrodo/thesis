@@ -1,31 +1,32 @@
 \chapter{Struttura dell'applicazione}
     L'applicazione segue una architettura client-server.
     Questa infrastruttura è composta da diversi programmi che interagiscono tra loro usando messaggi di rete.
-    Comunemente le componenti principali sono quelle di backend e di frontend.    
+    Comunemente, le componenti principali sono il backend e il frontend.    
 
-\section{Elementi dell'applicazione}
-    La prima di occupano della parte di logica di dominio dell'applicazione.
-    La seconda di rappresentare graficamente i dati e rendere le interazioni tra essi e l'utente fruibili.
-    Decuplicare le parti dell'applicazione consente di rendere i singoli componenti riusabili, 
-    l'esempio pi\'u comune \'e due client, uno web e uno mobile, che si interfacciano allo stesso backend.
-    Nel nostro caso in esame la parte di backend si occuperà di leggere i test da file system e esporli trammite un API 
-    che verrà consultata da una SPA \footnote{una single-page application (SPA) \'e una applicazione web che interagisce con l'utente dinamicamente ridisegnando la pagina corrente creando la struttura della pagina da un linguaggio di scripting e non delegando il caricamento al browser il caricamento del file HTML} web-based.
+    \section{Elementi dell'applicazione}
+        La prima dcomponente di backend si occupano della parte di logica di dominio dell'applicazione.
+        La seconda,denominata frontend, di  consente di rappresentare graficamente i dati e di rendere le interazioni tra essi gli stessi e l'utente fruibili.
+        Decuplicare le parti dell'applicazione consente di rendere i singoli componenti riusabiliriutilizzare i singoli componenti,. 
+        È possibile inoltre condividere la logica dell'applicazione  l'esempio pi\'u comune , prendendo \'e a titolo esemplificativo due client, uno web e uno mobile, che si interfacciano allo stesso backend.
+        Nel nostro  caso in esame , la parte di backend si occuperà di leggere i test da file system e di esporli trammitetramite un API un'API,
+        che la quale verrà consultata da una SPA Single Page Application.
 
-\section{Intercomunicazione tra gli elementi}
-    La comunicazione avviene tramite protocollo HTTP, ovvero messaggi di rete.
-    La condivisione del protocollo consente agli attori di comunicare senza conoscere i dettagli implementativi dell'altro.
-    Ci\'o porta a un altro vantaggio: gli elementi possono risiedere su strutture diverse o essere scritti in linguaggi differenti a seconda delle diverse necessità del programma.
-    Le parti principali di un messaggio HTTP sono:
-    \begin{itemize}
-        \item \textbf{l'indirizzo:} che indica la risorsa a cui fa riferimento la richiesta
-        \item \textbf{Il metodo:} ovvero il tipo di azione da eseguire 
-        \item \textbf{Il corpo:} Dati di parametro per una richiesta o di risultato per una risposta. 
-    \end{itemize}
+    \section{Intercomunicazione tra gli elementi}
+        La comunicazione avviene tramite protocollo HTTP, ovvero tramite messaggi di rete.
+        La condivisione del protocollo consente aglid un attorie di comunicare senza conoscere i dettagli implementativi dell'altro.
+        Ci\'o porta a un altro implica un ulteriore vantaggio: gli elementi possono risiedere su strutture diverse o essere scritti in linguaggi differenti, a seconda delle diverse necessità del programma.
+        Le parti principali di un messaggio HTTP sono:
+        \begin{itemize}
+            \item \textbf{l’indirizzo:} che indica la risorsa a cui fa riferimento la richiesta
+            \item \textbf{Il metodo:} ovvero il tipo di azione da eseguire 
+            \item \textbf{Il corpo:} che indica il contenuto del messaggio
+            \item \textbf{status code:} un codice che indica la buona riuscita di un'operazione o il motivo per cui essa è fallita 
+        \end{itemize}
 
-\section{Vantaggi, svantaggi dell'architettura e alternative}
-    I vantaggi di questa architettura, come precedentemente detto, sono la decuplicazione dei diversi elementi, e il loro riuso e la separazione delle responsabilità.
-    Nel caso in futuro uno sviluppatore voglia sviluppare un plugin per ottenere lo stato dei test direttamente da IDE, lo potrà fare riusando le API prodotte.
-    Dall'altra parte, di contro, la separazione degli elementi porta una piccola duplicazione in quelle che sono le parti comuni tra il client e il server, come i modelli di dominio.
-    Un'alternativa precedentemente usata per un tool aziendale e l'implementazione di una interfaccia web generata in modo statico da un server.
-    In questo modo in base ai parametri il server crerà un documento HTML specifico.
-    Questo sistema non \'e per\'o estensibile e riusabile come REST.
+    \section{Vantaggi, svantaggi dell'architettura e alternative}
+        I vantaggi di questa architettura, come precedentemente detto, sono la decuplicazionededuplicazione dei diversi elementi, e il loro riusoriutilizzo  e la separazione delle responsabilità.
+        Nel caso in futuro Se uno sviluppatore voglia, in futuro , sviluppare un plugin per ottenere lo stato dei test direttamente da IDE, lo potrà fare riusandosando le API prodotte.
+        Dall'altra parte, di contro, i contro, la separazione degli elementi porta una piccola duplicazione in quelle che sono le parti comuni tra il client e il server, come i modelli di dominio.
+        Un'alternativa precedentemente usata per un tool aziendale eè l'implementazione di una interfaccia ’applicazione web generata in modo statico da un server, la quale genererà ogni volta un documento di markup (HTML) in base alla richiesta dell’applicazione.
+        In questo modo in base ai parametri il server crerà un documento HTML specifico.
+        Questo sistema non \'e per\'o estensibile e riusabile come REST, essendo la logica di dominio e la generazione della pagina eseguita dallo stesso componente.

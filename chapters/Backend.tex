@@ -21,9 +21,9 @@
                     \item il formato dell'URI 
                     \item il metodo
                     \item il formato di interscampio dei dati (json, xml ecc) 
-                    \item la struttura del response 
-                    \item come deve essere strutturato il body perchè la richiesta sia valida
-                    \item i codici di errori e la loro semantica specifica nel contesto dell'applicazione
+                    \item la struttura della risposta
+                    \item come deve essere strutturata la richiesta perch\'e essa sia valida
+                        \item i codici di errori e la loro semantica specifica nel contesto dell'applicazione
                 \end{itemize}
                 
             \subsection{Documentazione\label{apidoc}}
@@ -45,13 +45,14 @@
     \section{Tecnologie Utilizzate}  
         \subsection{Python}
             Python \'e un linguaggio di scripting, interpretato ad alto livello, ovvero la gestione della memoria viene effettuata da un sistema di garbage collection e non delegata allo sviluppatore.
-            L'uso di python è dovuto al fatto che \'e un linguaggio gi\'a usato per lo scripting all'interno dell'applicazione e dunque gi\'a familiare a motli sviluppatori.
+            Questo linguaggio è stato scelto siccome \'e usato per lo scripting all'interno di altri applicativi esistenti e dunque gi\'a familiare a molti sviluppatori.
             Tra le varie librerie prodotte \'e presente anche un modulo per lanciare i test e inviare i risultati agli sviluppatori via e-mail.
             Questo modulo non è stato utilizzato all'interno del test report l'uso dello stesso linguaggio ha contribuito a mantenere la code-base pi\'u uniforme.
         \subsection{Flask}  
             Flask \'e un \textit{micro}Framework per la creazione di servizi web, esso consente di creare applicazioni complete o API (come nel nostro caso)
             La sua peculiarit\'a \'e la sua minimalit\'a e consente si scrivere applicazioni in modo rapido riducendo al minimo la parte di codice che si occupa della gestione dell'interfaccia HTTP, usando gli strumenti di introsprezione del codice offerti dal linguaggio come i decoratori.
-            Esso \'e stato scelto perch\'e l'applicazione non necessitava di gestioni di basso livello riguardo la comunicazione di rete, ma la parte pi\'u importante dell'applicazione era l'attraversamento del file system per collezionare le informazioni riguardo ai test e l'interfaccia con i sistemi di versioning.
+            Esso \'e stato scelto perch\'e l'applicazione, essendo destinata all'uso interno, non necessitava di gestioni di rete di basso livello.
+            L'attenzione principale \'e stata invece posta sulla riusabilità dell'API. TODO: dire altro???
 
     \section{Implementazione interna}
         \subsection{Interazione con i sistemi di controllo di versione}
