@@ -1,7 +1,6 @@
 \chapter{Frontend}
-    Questa parte di applicazione si occupa della visualizzazione dei test.
-    Inoltre rende disponibile un'interfaccia per sostituire e committare i test.
-    Pu\'o anche essere integrato con un tool esterno per consultare le differenze tra i test.
+    Questa parte dell'applicazione consiste in un'interfaccia che si consente all'utente di visualizzare, sostituire i test e di committarne le modifiche.
+    Pu\'o anche essere integrato con un tool esterno per consultare le differenze tra il risultato atteso e quello ottenuto.
     \begin{figure}
         \includegraphics[width=\textwidth]{images/homepage.png}
         \caption{La pagina di home dell'interfaccia web attraverso la quale \'e possibile scegliere quale test suite consultare.}
@@ -11,31 +10,30 @@
         Questo framework consente di sviluppare SPA (Single Page application)
         TODO: Spiegare cosa \'e Angular e cosa \'e una single page applicazition SPA
         \subsection{Scelta dell'utilizzo}
-            \'E stato scelto di usare Angular, perchè è un framework stabile supportato da Google
-            e \'e già stato usato precedentemente per lo sviluppo di altri applicativi.
+            \'E stato scelto di usare Angular, perchè è un framework completo supportato da Google
+            ed \'e già stato usato precedentemente per lo sviluppo di altri applicativi.
             
-            La struttura a componenti, favorisce il riuso del codice perciò è stato possibile integrare
-            nello sviluppo componenti già sviluppati da altri, che forniscono comportamenti base
-            come il rendering 3d di un file CAD proprietario.
+            Angular ha una struttura a componenti ovvero l'applicazione viene creata combinando elementi grafici con una singola responsabilità.
+            Questo paradigma di programmazione consente il riuso del codice, per esempio, un componente precedentemente sviluppato consente
+            di renderizzare un file CAD proprietario all'interno della pagina web.
         
         \subsection{Typescript}
             Un altro motivo per la scelta di Angular è \href{https://www.typescriptlang.org}{Typescript}.
-            Typescript è un \textit{superset di javascript} cioè una sua estensione che ingloba tutte le sue feature e ne aggiunge altre.
+            Typescript è un \textit{superset di javascript} cioè una estensione che ne ingloba tutte le funzionalità e ne aggiunge altre.
             La sua peculiarità principale è l'aggiunta di uno step di compilazione che consente di aggiungere una tipizzazione statica.
             Questa tipizzazione consente allo sviluppatore di
             \href{https://www.quora.com/Why-is-type-checking-important-in-programming-languages-and-how-should-one-choose-between-dynamically-and-statically-typed-languages}{ridurre errori banali}.
     \section{Funzionalità}
         La prima responsabilità dell'interfaccia web \'e rendere i test fruibili graficamente.
-        Ogni test \'e rappresentato da una card che contiene una lista di references con un indicatore grafico del loro stato.
+        Ogni test \'e rappresentato da una scheda (in gergo \textit{card}) che contiene una lista di references con un indicatore grafico del loro stato.
         \begin{figure}
             \includegraphics[width=\textwidth]{images/page.png}
             \caption{Un esempio di visualizzazione di test}
         \end{figure}
         \subsection{visualizzazione dei test}        
-            Uno scopo del report \'e rendere pi\'u facile individuare i test in base al loro stato.
-            \'E perci\'o possibile filtrare i test in base al loro stato e rendere visualizzabili solo quelli con almeno un reference in errore.
-            Si pu\'o anche applicare il filtro a un ulteriore livello di profondit\'a e nascondendo le reference corrette all'interno di un test.
-            \\
+            Uno scopo del report \'e rendere pi\'u facile individuare i test in errore.
+            \'E perci\'o possibile filtrare i test in base al loro stato rendendo visualizzabili solo quelli con almeno una reference in errore.
+            Lo sviluppatore pu\'o anche nascondere le reference corrette all'interno del test in errore.\\
             Un ulteriore modo per togliere un test dalla vista \'e l'operazione di \textit{collapse}, essa consente di nascondere tutte le reference lasciando solamente il nome del test.
             Con una specifica pagina di configurazione si pu\'o personalizzare il comportamento del programma in modo che tutti i test vengano collassati all'avvio dell'applicazione.
             
@@ -55,13 +53,14 @@
             L'interfaccia web dispone una sezione per salvare le azioni e committarle.
             In un area specifica vengono visualizzate tutte le azioni, che possono essere annullate o definitivamente registrate.
             \subsection{Navigazione}
-                \'E  disponibile un metodo di navigazione per aumentare l'usabilità dell'applicazione.
-                Durante la navigazione è possibile rendere un test \textit{focussed} e effettuare operazioni (come nasconderlo o metterlo in stage) usando delle scorciatoie da tastiera.\\
+                \'E disponibile un metodo di navigazione per aumentare l'usabilità dell'applicazione.
+                Durante la navigazione è possibile rendere un test \textit{focussed} e effettuare operazioni su esso usando delle scorciatoie da tastiera.\\
+                Usando il tasto \textbf{C} E' possibile rendere il test \textit{collapsed} o usando \textbf{S} mettere tutte le sue reference in area di stage.\\ 
+                Nello stesso modo si puo spostare il focus della navigazione sul prossimo elemento o su quello precedente, rispettivamente con \textbf{N}(NEXT) o \textbf{B}(BACK).
                 Quando il focus si sposta su un nuovo test la pagina effettua un operazione di scroll per includerlo nella parte visibile della pagina.
-                Si puo spostare il focus della navigazione sul prossimo elemento o su quello precedente usando delle scorciatoie da tastiera.
                 Lo stato della navigazione viene descritto nell'URL, scrivendo il nome dell'elemento in focus nella sezione denominata \textit{fragment}.\\
                 Se la pagina viene richiesta con un fragment già impostato, in fase di rendering dei tests viene posto il focus automaticamente sul test con quel nome (in questo modo sar\'a visualizzabile gi\'a al caricamento della pagina).\\
-                Nella filosofia web questo rende condivisibile una risorsa primaria dell'applicazione usando un URL.
+                La gestione dei fragment rende condivisibile e indirizzabile una risorsa primaria dell'applicazione usando un URL, come voluto dalla filosofia web. 
             
             \begin{figure}
                 \includegraphics[width=\textwidth]{images/active.png}
@@ -70,6 +69,6 @@
             \section{Interazione con gli altri tool aziendali}
                 La consultazione delle differenze viene delegata a un tool aziendale già sviluppato in precedenza, denominato \textit{Differ}.
                 Anch'esso \'e un tool web quindi questa integrazione avviene  costruendo un URI per navigare nella pagina successiva.
-                Il Differ \'e integrato a sua volta con il processo di lancio dei test, e una volta terminato salva le differenze dei test per ogni sessione.
-                Il report in oggetto produce un interfaccia in tempo reale con lo stato del server mentre il tool per le differenze salva solo il confronto tra i file reference e current alla fine di ogni sessione.
-                perci\'o per sincronizzare lo stato tra i due sistemi \'e necessario recuperare l'ultima sessione di test eseguita e, per ogni reference, creare un url che associ il file con la pagina della differenza.
+                Il processo di esecuzione dei test di occupa di salvare i risultati di ogni sessione di test e rendere i risultati disponibili tramite Differ mantenendo dunque una cronologia.
+                Il report in oggetto, invece produce un interfaccia in tempo reale basata lo stato del server.
+                Per sincronizzare lo stato tra i due sistemi \'e necessario recuperare l'ultima sessione di test eseguita e, per ogni reference, creare un url che associ il test con le sue differenze.
