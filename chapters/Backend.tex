@@ -55,23 +55,46 @@
             L'attenzione principale \'e stata invece posta sulla riusabilità dell'API.
 
     \section{Interazione con i sistemi di controllo di versione}           
-        Tutte le azioni effettuate dal report sono operazioni sul file system che vengono successivamente registrate in un sistema di controllo di versione.
-        Il risultato delle azioni performate vengono salvate in un area di stage (o pre-commit).
-        Questo rende le operazioni completamente reversibili e le modifiche non vengono rese effettive fino a quando non viene creato un commit e viene revisionato.\\
-        Una specifica del report \'e poter usare sia \textbf{Git} e \textbf{Svn (Subversion)} in modo trasparente allo sviluppatore.
-        Questo per facilitare una migrazione futura delle suite di test da Subversion a Git.
+        Un sistema di controllo di versione è un software distribuito che si occupa di tenere traccia di tutti i cambiamenti effettuati su un progetto.
+        Lo sviluppatore dopo ogni modifica si occuperà di registrarla nel sistema, creando quello che viene definito un commit.
+        Questi software consentono di ripristinare versioni precedenti e avere uno storico dei cambiamenti effettuati.
+        Le tests suite sono revisionate con un sistema di versioning.
+        L'API oltre alla modifica, aggiunta o rimozione dei test si occupa anche di versionare queste azioni nel sistema usato dalla suite.
+        Internamente vengono usati sia \textbf{GIT} che \textbf{SubVersion (SVN)} e una specifica del report è supportare entrambi in modo trasparente allo sviluppatore.
+        Questa funzionalità nasce da una necessità futura di effettuare una migrazione delle test suite revisionate attualmente con SVN a GIT.
             
     \section{Struttura dell'API}
-        TODO:
-    
-    \section{Bundling dell'applicazione e deploy}
-        TODO: Spiegare come l'ho messo sul server
+        Nel processo di design dell'API si è scelto di adottare i principi architetturali REST.
+        Il primo punto di questa filosofia consiste nel poter assegnare un indirizzo (detto \textit{URI} ovvero \textit{Unique Resource Identifier}) a ogni risorsa dell'applicazione.
+        L'URI deve essere univoco e descrittivo riguardo al tipo di risorsa che si sta richiedendo.
+        La comunicazione si basa sul protocollo HTTP e coinvolge due tipi di attori chiamati client e server.
+        Il server si occupa di esporre l'API e i client di effettuare una serie di richieste per manipolare le risorse a seconda delle loro necessità.
+        Ogni messaggio scambiato tra i client e il server si occupa di effettuare una singola operazione su un oggetto.
+        La richiesta è composta da un URI, che  indica il soggetto e un metodo che descrive quale azione compiere.
+        I metodi principali sono:
+        
+        \begin{itemize}
+            \item \textbf{GET} per ottenere le informazioni relative a una risorsa
+            \item \textbf{POST} per la creazione di nuove risorse
 
-        In produzione l'applicazione serve l'API e il frontend sulla stessa porta.
-        La SPA è stata compilata in una cartella di file statici, (quali html e javascript) in modo che essi possano essere serviti dall'applicazione senza usare un server di debug separato.
-        Per rendere disponibili le due parti dell'applicazioni sotto lo stesso indirizzo è stato modificato il metodo di risoluzione delle sottochiamate
-        Gli indirizzi che iniziano con \textit{v1/} contengono le chiamate dell'API.
-        i rimanenti si occupano di servire il frontend, e son stati a loro volta suddivisi:
-        I file statici (detti assets) e le route della Single Page Application.
-        Se il percorso coincide con file presente nella cartella \textit{static} esso viene servito trammite HTTP.
-        Altrimenti viene esposta la single page application, servendo il file html, che reindirizzerà l'utente sulla pagina richiesta o segnalerà un errore se la route è invalida o inesistente.
+            \item \textbf{PUT} si riferisce alla modifica di elementi già presenti nel sistema
+            \item \textbf{DELETE} per eliminare una risorsa
+        \end{itemize}
+        
+        il server risponderà con un pacchetto HTTP composto da uno status code e un corpo contente il risultato dell'operazione.
+        lo status code è un codice di 3 cifre che descrive se l'operazione è andata a buon fine o il tipo di errore (per esempio: risorsa non trovata, utente non autorizzato ecc...)
+        
+        Nel nostro caso gli indirizzi delle risorse sono stati così creati: 
+        \begin{itemize}
+            \item \textbf{Suite} \verb|/easywood|
+            \item \textbf{Test} \verb|/easywood/doh2hw527jm|
+            \item \textbf{Reference} \verb|/easywood/doh2hw527jm/64bit|
+        \end{itemize}
+        
+        Ogni API definisce una semantica specifica per le sue operazioni.
+        Nel nostro caso non ogni metodo è stato definito dal servizio, perché altre operazioni come la creazione di un test o una suite esulano dalle responsabilità dell'applicazione.
+        Per i test è disponibile il metodo GET per  ottenerne il nome, il path relativo e le sue reference.
+        Ognuna di esse è composta da stato di errore e di stato di registrazione nel sistema (registrato, modificato o non registrato).
+        Per le reference sono disponibili anche i metodi PUT e DELETE. PUT è per definizione da specifica di REST idempotente e si occupa della modifica di una risorsa, percio nel nostro caso registra nel sistema le eventuali modifiche/differenze ottenute durante la sessione di test, se la reference si trova in stato di errore essa verrà sostituita dal suo file current, altrimenti se non è in errore o è già stata modificata non verrà effettuata alcuna operazione.
+        I soggetti dell'API sono le operazioni di registrazione dei test, perciò l'operazione di DELETE assume la semantica di "undo", ovvero ripristino dello stato del sistema all'ultima configurazione registrata nel controllo di versione.
+        
