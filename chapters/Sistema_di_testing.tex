@@ -1,13 +1,13 @@
 \chapter{Sistema di Testing}
     \section{Meccanismo dell'oracolo\label{oracolo}}
-        Nel flusso di sviluppo attuale vi è una fase di test di integrazione.
-        Per la verifica del test viene sfruttato il meccanismo dell’oracolo.
+        Nel flusso di sviluppo attuale vi è una fase di test di integrazione.\\
+        Per la verifica del test viene sfruttato il meccanismo dell’oracolo.\\
         Esso consiste nell'accoppiare ogni test all'output corrispondente (chiamato appunto oracolo)
-        e successivamente nell'effettuare un confronto tra il risultato del test e il suo riferimento.
+        e successivamente nell'effettuare un confronto tra il risultato del test e il suo riferimento.\\
         Il test viene dichiarato fallimentare se ci sono differenze tra gli outcome.
         
-        La particolarit\'a del meccanismo sta nella facolt\'a del test di riferirsi ad un unica funzionalit\'a o ad un insieme di esse strettamente correlate tra loro.
-        Questo consente allo sviluppatore di individuare eventuali errori con maggiore precisione nel caso in cui il test fallisca. 
+        Ogni test deve riferirsi solo a una funzionalit\'a o ad un insieme di esse strettamente correlate tra loro.
+        Questo consente allo sviluppatore di individuare eventuali errori con maggiore precisione nel caso in cui un test fallisca. 
         Se vi fosse la necessit\'a di cambiare le specifiche del software o di aggiungerne funzionalit\'a, \'e possibile rispettivamente modificare un oracolo esistente o crearne uno nuovo. 
 
         Nel nostro sistema l'oracolo è salvato in un file \textit{.reference} e il risultato prodotto
@@ -24,43 +24,24 @@
             \item un file CAD di partenza
             \item dei file per descrivere una configurazione specifica di un determinato cliente
             \item un file scl (linguaggio di scripting proprietario) o un file python
-            \item un riferimento (file .reference)
+            \item uno o pi\'u riferimenti (file .reference)
         \end{itemize}
+
     \section{Ciclo di vita del test}
-        Il software, per lanciare un test, importa il file CAD e le configurazioni clienti.
-        Successivamente esegue lo script SCL o Python, che con opportune librerie, si interfaccia con il software
+        Il software, per lanciare un test, importa il file CAD e le configurazioni del cliente.\\
+        Successivamente esegue lo script SCL\footnote{\textbf{Sculptor Common Language} \'e un linguaggio di scripting proprietario interpretato con un insieme di routine per il disegno e la manifattura dei materiali} o Python, che con opportune librerie, si interfaccia con il software
         e simula le operazioni utente. 
         
-        Una volta terminate le operazioni, il test salva il suo stato in un file e lo confronta con la sua reference 
-        salvata nella cache del test. 
+        Tra le diverse routine alcune si occupano di creare le reference esportando un risultato parziale dal programma come uno screenshot, un gruppo di entit\'a geometriche o un file testuale.
+
+        Durante la esecuzione di un test i suoi outcome vengono salvati in una cartella di cache.
+        Nel caso sia gi\'a presente una reference esso viene salvato come current.
 
         Se il file prodotto dalle operazioni \'e uguale all'oracolo, esso viene rimosso dal file system.
-        In caso contrario il test \'e in stato di errore e l'output resta disponibile per un confronto.
+        In caso contrario il test \'e in stato di errore e l'output resta disponibile per il confronto.
 
     \section{Versioning dei tests}
             I test si trovano sotto un sistema di versioning.
             Quando uno sviluppatore decide di cambiare il comportamento di un caso d'uso o di aggiungere una funzionalità al software,
             sar\'a necessario modificare o creare un test.\\
             Esso verrà committato nel sistema di versioning in modo che gli altri sviluppatori possano testare il software secondo le nuove specifiche definite dal test.    
-            
-    \section{Integrazione nel Workflow}
-        \subsection{Fase Preliminare di sviluppo}
-            I test sono suddivisi in caso d'uso.\\
-            Pertanto, nella la maggior parte dei casi, lo sviluppatore riconosce i test che controlleranno la correttezza della sua modifica.\\
-            In seguito verr\'a eseguito in locale solo un sottoinsieme di test al fine di ottenere una conferma preliminare della correttezza dello sviluppo. \\
-        \subsection{Server di testing}
-            Essendo la test suite molto ampia e il processo di testing molto dispendioso computazionalmente, 
-            la sessione di test non viene lanciata in locale dal singolo sviluppatore, 
-            Bens\'i  le modifiche del software già precedentemente compilate (sostituendo l’exe o una libreria dinamica .dll) 
-            vengono caricate su un server apposito, il quale eseguir\'a ogni test della test suite.
-            
-            Nel caso in cui non ci siano test in stato di errore, la modifica al software viene committata e resa disponibile agli altri sviluppatori.
-            
-            Anche per questo motivo lo sviluppatore non interagisce direttamente sui singoli casi di test da file system,
-            ma al fine di elencare i test fallimentari, di confrontarli e di committare eventuali cambiamenti negli oracoli, usa un report dinamico, 
-            proprietario, oggetto di questa tesi.
-
-            Il processo di esecuzione dei test sul server \'e delegato a uno script specifico.\\ 
-            Questo si occupa di scaricare nuovamente i test da sistema di controllo di versione.\\
-            Il programma sucessivamente lancia la suite su un'istanza del programma, per poi leggerne i file di log e notificare gli sviluppatori con una e-mail.\\
-            Questa email conterr\'a delle informazioni preliminari, come il numero di test falliti, il tempo di esecuzione totale e un link al report dettagliato.

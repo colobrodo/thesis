@@ -3,7 +3,7 @@
         \'E stato scelto Python perchè è un linguaggio già usato internamente per lo sviluppo di plugin e tool interni.
 
         \section{Specifica e documentazione}
-            Prima della fase di sviluppo è stata predisposto un periodo di design dell' API.
+            Prima della fase di sviluppo è stata predisposto un periodo di design dell' API.\\
             Questo processo ha prodotto un file di specifica (descritta nel paragrafo 
             \ref{openapi}).\\\\
             Questa fase preliminare allo sviluppo è durata circa una settimana ed è servita per 
@@ -54,19 +54,22 @@
             Tra le varie librerie prodotte \'e presente anche un modulo per lanciare i test e inviare i risultati agli sviluppatori via e-mail.
             Questo modulo non è stato utilizzato all'interno del test report ma l'uso dello stesso linguaggio ha contribuito a mantenere la code-base pi\'u uniforme.
         \subsection{Flask}  
-            Flask \'e un \textit{micro}Framework per la creazione di servizi web, esso consente di creare applicazioni complete o API (come nel nostro caso)
-            La sua peculiarit\'a \'e la sua minimalit\'a e consente si scrivere applicazioni in modo rapido riducendo al minimo la parte di codice che si occupa della gestione dell'interfaccia HTTP, usando gli strumenti di introsprezione del codice offerti dal linguaggio come i decoratori.
-            Esso \'e stato scelto perch\'e l'applicazione, essendo destinata all'uso interno, non necessitava di gestioni di rete di basso livello.
+            Flask \'e un \textit{micro}Framework per la creazione di servizi web, esso consente di creare applicazioni complete o API (come nel nostro caso).\\
+            La sua peculiarit\'a \'e la minimalit\'a e consente si scrivere applicazioni in modo rapido riducendo al minimo la parte di codice che si occupa della gestione dell'interfaccia HTTP.\\
+            Questo \'e possibile grazie agli strumenti di introsprezione del codice offerti dal linguaggio come i decoratori.\\
+
+            Esso \'e stato scelto perch\'e l'applicazione, essendo destinata all'uso interno, non necessitava di gestioni di rete di basso livello per gestire grandi quantit\'a di richieste.\\
             L'attenzione principale \'e stata invece posta sulla riusabilità dell'API.
 
     \section{Interazione con i sistemi di controllo di versione}           
-        Un sistema di controllo di versione è un software distribuito che si occupa di tenere traccia di tutti i cambiamenti effettuati su un progetto.
-        Lo sviluppatore dopo ogni modifica si occuperà di registrarla nel sistema, creando quello che viene definito un commit.
-        Questi software consentono di ripristinare versioni precedenti e avere uno storico dei cambiamenti effettuati.
+        Un sistema di controllo di versione è un software distribuito che si occupa di tenere traccia di tutti i cambiamenti effettuati su un progetto.\\
+        Lo sviluppatore dopo ogni modifica si occuperà di registrarla nel sistema, creando quello che viene definito un commit.\\
+        Questi software consentono di ripristinare versioni precedenti e avere uno storico dei cambiamenti effettuati.\\
         Le tests suite sono revisionate con un sistema di versioning.
-        L'API oltre alla modifica, aggiunta o rimozione dei test si occupa anche di versionare queste azioni nel sistema usato dalla suite.
-        Internamente vengono usati sia \textbf{GIT} che \textbf{SubVersion (SVN)} e una specifica del report è supportare entrambi in modo trasparente allo sviluppatore.
-        Questa funzionalità nasce da una necessità futura di effettuare una migrazione delle test suite revisionate attualmente con SVN a GIT.
+        
+        L'API oltre alla modifica, aggiunta o rimozione dei test si occupa anche di versionare queste azioni nel sistema usato dalla suite.\\
+        Internamente vengono usati sia \textbf{GIT} che \textbf{SubVersion (SVN)} e una specifica del report è supportare entrambi in modo trasparente allo sviluppatore.\\
+        Questa funzionalità nasce da una necessità futura di effettuare una migrazione delle test suite revisionate attualmente con SVN a GIT.\\
             
     \section{Struttura dell'API}
         Nel processo di design dell'API si è scelto di adottare i principi architetturali REST.

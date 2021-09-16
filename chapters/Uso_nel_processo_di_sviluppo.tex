@@ -7,27 +7,37 @@
         Ora vengono scritte o modificate le porzioni di codice necessarie per la correzzione dell'errore o l'aggiunta della funzionalit\'a.
         Dal sorgente modificato viene compilata una versione di debug del software che verr\'a usata per lo sviluppo.
         Al termine della fase di scrittura del codice, per testare l'effettiva correttezza in ogni caso d'uso viene compilato il modulo modificato in una versione \textit{release} sia a 32 che 64 bit.
-        La versione di release differisce da quella di debug perch\'e non dispone di tutte le operazioni di log e telemetrica garantendo delle maggiori performance del software.
-        Il file compilato, che sia eseguibile o \textit{DLL} viene sostituito sul server di test.
-        Ora lo sviluppatore lancia tutti i test presenti nella suite come descritto pi\'u dettagliatamente nel capitolo \ref{testexecution}.
+        La versione di release differisce da quella di debug perch\'e non dispone di tutte le operazioni di log e telemetrica garantendo delle maggiori performance del software.\\
         
-        Al termine dell'esecuzione dei test viene notificato con un mail contentente un link al report.
-        Attraverso l'uso del report il programmatore decide se i test hanno prodotto il risultato sperato le modifiche verranno revisionate nel sistema di controllo di versione.
+        I test sono suddivisi in caso d'uso.\\
+        Pertanto, nella la maggior parte dei casi, lo sviluppatore sa quali test  controlleranno la correttezza della sua modifica.\\
+        Generalmente viene eseguito in locale solo un sottoinsieme di test al fine di ottenere una conferma preliminare della correttezza dello sviluppo.
+
+        Essendo la test suite molto ampia e il processo di testing molto dispendioso computazionalmente, 
+        la sessione di test non viene lanciata in locale dal singolo sviluppatore, 
+        Bens\'i  le modifiche del software già precedentemente compilate (sostituendo l’exe o una libreria dinamica .dll) 
+        vengono caricate su un server apposito, il quale eseguir\'a ogni test della test suite.
+
+        Il processo di testing su server \'e descritto pi\'u dettagliatamente nel capitolo \ref{testexecution}.
+        
+        Al termine dell'esecuzione dei test gli sviluppatori interessati vengono notificati con un mail contentente un link al report.
+        Attraverso l'uso del report il programmatore decide se i test hanno prodotto il risultato sperato.
+        Nel miglior caso le modifiche verranno revisionate nel sistema di controllo di versione.
         Altrimenti e\' necessario debuggare i test con esito negativo per capire quali sono i comportamenti introdotti che non seguono le specifiche. 
 
     \section{Bundling e deploy}
-        Ogni team che si occupa dello sviluppo di un'applicazione di CAD/CAM ha adibito un server interno per la compilazione e il testing del proprio programma.
+        Ogni team che si occupa dello sviluppo di un'applicazione di CAD/CAM ha adibito un server interno per la compilazione e il testing del proprio programma.\\
         L'applicativo di report dei test è stato installato su ogni server.
 
-        Essendo l'applicazione web-based è stata adibita una porta dove servire la pagina.
+        Essendo l'applicazione web-based è stata adibita una porta dove servire la pagina.\\
         Sulla stessa porta è stata esposta anche l'API.
         
-        In fase di sviluppo vengono usati due processi, uno per il frontend e uno per il backend, che comunicano tra loro tramite messaggi HTTP.
-        Questa gestione è diversa in fase di produzione siccome il processo che serve la parte frontend si occupa di ricaricare la pagina quando occorre una modifica sui file del progetto angular, in modo da mostrare le modifiche in modo interattivo allo sviluppatore.
-        Per l'interfaccia web viene dunque effettuata una fase detta di "bundling", dove i diversi file  vengono compilati in file statici (JS, HTML e CSS).
-        Vengono esposte entrambe le parti dell'applicazione sulla stessa porta grazie al sistema di routing.
-        Tutti gli indirizzi relativi all'API sono stati spostati nella sottoroute \verb|/v1|
-        Per le altre richieste viene controllato se esiste un file statico con lo stesso percorso altrimenti viene servito il file HTML principale in modo da delegare la segnalazione di errori o visualizzazione di pagine specifiche al sistema di routing usata dalla Single Page Application.
+        In fase di sviluppo vengono usati due processi, uno per il frontend e uno per il backend, che comunicano tra loro tramite messaggi HTTP.\\
+        Questa gestione è diversa in fase di produzione siccome il processo che serve la parte frontend si occupa di ricaricare la pagina quando occorre una modifica sui file del progetto angular, in modo da mostrare le modifiche in modo interattivo allo sviluppatore.\\
+        Per l'interfaccia web viene dunque effettuata una fase detta di "bundling", dove i diversi file  vengono compilati in file statici (JS, HTML e CSS).\\
+        Vengono esposte entrambe le parti dell'applicazione sulla stessa porta grazie al sistema di routing.\\
+        Tutti gli indirizzi relativi all'API sono stati spostati nella sottoroute \verb|/v1|.\\
+        Per le altre richieste viene controllato se esiste un file statico con lo stesso percorso altrimenti viene servito il file HTML principale in modo da delegare la segnalazione di errori o visualizzazione di pagine specifiche al sistema di routing usata dalla Single Page Application.\\
 
     \section{Processo di esecuzione dei test\label{testexecution}}
         I test vengono lanciati usando uno script.\\
