@@ -1,18 +1,21 @@
 \chapter{Sviluppi Futuri}
     \section{Migrazione test suite da svn a git}
         Le test suite sono attualmente revisionate dal sistema SVN che dispone di un controllo di versione molto piu elementare rispetto a GIT.
-        (Ad esempio non consente l'uso di branch).
-        Subversion \'e stato precedentemente utilizzato per la revisione di tutti i progetti all'interno dell'azienda, test inclusi.
+
+        Subversion \'e stato precedentemente utilizzato per la revisione di tutti i progetti all'interno dell'azienda, test inclusi.\\
         Attualmente si sta lentamente migrando verso l'uso estensivo di GIT, che offre molte pi\'u funzionalit\'a.
+
         Il test report favorisce questa migrazione utilizzando in modo trasparente all'utente entrambi i sistemi di versione. 
     \section{Performance dei test}
-        Il software ha la possibililtà di tenere traccia del tempo di esecuzione di un singolo test.
+        Il software ha la possibililtà di tenere traccia del tempo di esecuzione di un singolo test.\\
         Attualmente le performance di ogni test viene scritta in un database flat-file \footnote{Database con una struttura uniforme che vengono salvati in un unico file binario}.
-        Se un tempo supera una soglia che viene considerata il tempo di esecuzione standard di un test questo viene segnalato nella mail di notifica.
+
+        Se un tempo supera una soglia che viene considerata il tempo di esecuzione standard di un test questo viene segnalato nella mail di notifica.\\
         L'intenzione futura sarebbe includere nel report i tempi di esecuzione dei singoli test e segnalare quelli con un tempo di esecuzione troppo alto.
     \section{Differ integrato}
-        Una proposta per migliorare il report di test \'e quella di reimplementare il sistema di differenze senza riusare quello già esistente.
-        Questo rimuoverebbe il problema di allineare i due sistemi passando il token di sessione a entrambi.
+        Una proposta per migliorare il report di test \'e quella di reimplementare il sistema di differenze senza riusare quello già esistente.\\
+        Questo rimuoverebbe il problema di allineare i due sistemi passando il token di sessione a entrambi.\\
         Inolte in questo modo il report di test non puo garantire di essere sincronizzato con il differ esterno: se vengono effettuate modifiche (anche da controllo di versione) sui file reference il sistema non puo visualizzarne le differenze in tempo reale.
-        Un differ integrato si assumerebbe l'onere di calcolare le differenze tra i due file binari ed interpretarli correttamente in modo da esporre nell'API un confronto tra i file leggibile.
+        
+        Un differ integrato si assumerebbe l'onere di calcolare le differenze tra i due file binari ed interpretarli correttamente in modo da esporre nell'API un confronto tra i file leggibile.\\
         Questo consentirebbe di poter confrontare i file in qualsiasi momento senza caricarne prima le differenze su un server apposito.

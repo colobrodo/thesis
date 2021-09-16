@@ -40,14 +40,14 @@
     \section{Versioning dei tests}
             I test si trovano sotto un sistema di versioning.
             Quando uno sviluppatore decide di cambiare il comportamento di un caso d'uso o di aggiungere una funzionalità al software,
-            sar\'a necessario modificare o creare un test.
+            sar\'a necessario modificare o creare un test.\\
             Esso verrà committato nel sistema di versioning in modo che gli altri sviluppatori possano testare il software secondo le nuove specifiche definite dal test.    
             
     \section{Integrazione nel Workflow}
         \subsection{Fase Preliminare di sviluppo}
-            I test sono suddivisi in caso d'uso.
-            Pertanto, nella la maggior parte dei casi, lo sviluppatore riconosce i test che controlleranno la correttezza della sua modifica.
-            in seguito verr\'a eseguito in locale solo un sottoinsieme di test al fine di ottenere una conferma preliminare della correttezza dello sviluppo. 
+            I test sono suddivisi in caso d'uso.\\
+            Pertanto, nella la maggior parte dei casi, lo sviluppatore riconosce i test che controlleranno la correttezza della sua modifica.\\
+            In seguito verr\'a eseguito in locale solo un sottoinsieme di test al fine di ottenere una conferma preliminare della correttezza dello sviluppo. \\
         \subsection{Server di testing}
             Essendo la test suite molto ampia e il processo di testing molto dispendioso computazionalmente, 
             la sessione di test non viene lanciata in locale dal singolo sviluppatore, 
@@ -60,6 +60,7 @@
             ma al fine di elencare i test fallimentari, di confrontarli e di committare eventuali cambiamenti negli oracoli, usa un report dinamico, 
             proprietario, oggetto di questa tesi.
 
-            Il processo di esecuzione dei test sul server \'e delegato a uno script specifico, il quale si occupa di scaricare nuovamente i test da sistema di controllo di versione.
-            Il programma sucessivamente lancia la suite su un'istanza del programma, per poi leggerne i file di log e notificare gli sviluppatori con una e-mail.
+            Il processo di esecuzione dei test sul server \'e delegato a uno script specifico.\\ 
+            Questo si occupa di scaricare nuovamente i test da sistema di controllo di versione.\\
+            Il programma sucessivamente lancia la suite su un'istanza del programma, per poi leggerne i file di log e notificare gli sviluppatori con una e-mail.\\
             Questa email conterr\'a delle informazioni preliminari, come il numero di test falliti, il tempo di esecuzione totale e un link al report dettagliato.
