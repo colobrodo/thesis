@@ -7,19 +7,14 @@
             Questo processo ha prodotto un file di specifica (descritta nel paragrafo 
             \ref{openapi}).\\\\
             Questa fase preliminare allo sviluppo è durata circa una settimana ed è servita per 
-            individuare difficoltà tecniche in modo preliminare che sono sate discusse con il team.
-            Risparmiando così tempo in corso di sviluppo, evitando di dover ristrutturare l'applicazione.
+            individuare difficoltà tecniche in modo preliminare che sono sate discusse con il team.\\
+            In questo modo \'e stato risparmiato tempo durante lo sviluppo, evitando di dover ristrutturare l'applicazione successivamente.\\
             Questa specifica come vedremo in seguito è servita anche a produrre automaticamente una pagina di documentazione (\ref{apidoc}).
             
-            \begin{figure}
-                \includegraphics[width=\textwidth]{images/documentation.png}
-                \caption{Uno screenshot della pagina di documentazione generata dal processo di CI}
-            \end{figure}
-            
             \subsection{Specifica in linguaggio OpenAPI\label{openapi}}
-                La Specifica dell'API è stata scritta in formato OpenAPI.
+                La Specifica dell'API è stata scritta in formato OpenAPI.\\
                 Questo file può essere scritto in linguaggio JSON o YML, io ho scelto il secondo perchè
-                sintatticamente più leggero e usa l'indentazione per separare le sezioni, facilitandone dunque la scrittura. 
+                sintatticamente più leggero e usa l'indentazione per separare le sezioni, facilitandone dunque la scrittura. \\
                 Questo formato ci consente di descrivere tutte le chiamate che il server 
                 mette a disposizione, specificando:
                 \begin{itemize}
@@ -33,25 +28,29 @@
                 
             \subsection{Documentazione\label{apidoc}}
                 Inoltre da questa specifica è possibile generare la documentazione, in pagina statica html,
-                tramite l'utilizzo di diverse cli.
+                tramite l'utilizzo di diverse cli\footnote{Command Line Interface}.\\
                 Io ho scelto ReDoc, perchè mette a disposizione diverse vendore-extension, cioè sezioni che
-                se specificate provedono una maggiore customizzazione della pagina generata, come sezioni di codici disposizione
-                esempio per effettuare una determinata chiamata al server.
-                Oppure aggiungere riferimenti a file markdown esterni da includere nella documentazione.
+                se specificate provedono una maggiore customizzazione della pagina generata.\\
+                Queste estensioni sono state usate per sezioni di codice di esempio riguardo a come effettuare una chiamata al server, e per aggiungere riferimenti a file markdown esterni da includere nella documentazione.
                 
+                \begin{figure}[h]
+                    \includegraphics[width=\textwidth]{images/documentation.png}
+                    \caption{Uno screenshot della pagina di documentazione generata dal processo di CI}
+                \end{figure}
+
             \subsection{Continous integration}
                 Il processo di scrittura della documentazione è stato aggiunto a una pipeline di CI
                 \footnote{\textbf{Continous Integration} - L'integrazione continua consiste nell'integrare gli ambienti di sviluppo dei diversi sviluppatori tramite processi di build, testing ecc... eseguiti da un server condiviso}.
                 Questo processo si occupa, solo se il file .yml di specifica viene modificato, di 
-                rigenerare il file html di documentazione.
+                rigenerare il file html di documentazione.\\
                 Questo file viene successivamente servito in modo da rendere la documentazione 
                 disponibile online e sempre aggiornata con le specifiche.
 
     \section{Tecnologie Utilizzate}  
         \subsection{Python}
-            Python \'e un linguaggio di scripting, interpretato ad alto livello, ovvero la gestione della memoria viene effettuata da un sistema di garbage collection e non delegata allo sviluppatore.
-            Questo linguaggio è stato scelto siccome \'e usato per lo scripting all'interno di altri applicativi esistenti e dunque gi\'a familiare a molti sviluppatori.
-            Tra le varie librerie prodotte \'e presente anche un modulo per lanciare i test e inviare i risultati agli sviluppatori via e-mail.
+            Python \'e un linguaggio di scripting, interpretato ad alto livello, ovvero la gestione della memoria viene effettuata da un sistema di garbage collection e non delegata allo sviluppatore.\\
+            Questo linguaggio è stato scelto siccome \'e usato per lo scripting all'interno di altri applicativi esistenti e dunque gi\'a familiare a molti sviluppatori.\\
+            Tra le varie librerie prodotte \'e presente anche un modulo per lanciare i test e inviare i risultati agli sviluppatori via e-mail.\\
             Questo modulo non è stato utilizzato all'interno del test report ma l'uso dello stesso linguaggio ha contribuito a mantenere la code-base pi\'u uniforme.
         \subsection{Flask}  
             Flask \'e un \textit{micro}Framework per la creazione di servizi web, esso consente di creare applicazioni complete o API (come nel nostro caso).\\

@@ -8,6 +8,8 @@
 \usepackage[italian]{babel}
 \usepackage{fancyhdr}
 
+\preto{\section}{\filbreak}
+
 \title{Test Report}
 \author{Davide Cologni}
 
@@ -77,6 +79,8 @@
 
     \tableofcontents
     
+    \listoffigures
+
     \input{chapters/Introduction.tex}
 
     \input{chapters/Sistema_di_testing.tex}

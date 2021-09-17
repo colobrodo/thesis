@@ -24,12 +24,12 @@
         Il formato di interscambio dei dati usato \'e \textit{JSON}.
 
     \section{Vantaggi, svantaggi dell'architettura e alternative}
-        I vantaggi di questa architettura, come precedentemente detto, sono la decuplicazione dei diversi elementi, e il loro riutilizzo e la separazione delle responsabilità.
+        I vantaggi di questa architettura, come precedentemente detto, sono la decuplicazione dei diversi elementi, il loro riutilizzo e la separazione delle responsabilità.
         
-        In un caso futuro, sarà possibile sviluppare un altro frontend per visualizzare i test su un altra piattaforma riutilizzando il backend e garantendo la stessa logica applicativa.
-        Viceversa la parte di frontend non conosce i dettagli implementativi usati dal backend come la gestione delle reference tramite file system e il sistema di versioning.
+        In un caso futuro, sarà possibile sviluppare un altro frontend per visualizzare i test su un altra piattaforma riutilizzando il backend e garantendo la stessa logica applicativa.\\
+        Viceversa la parte di frontend non conosce i dettagli implementativi usati dal backend come la gestione delle reference tramite file system e il sistema di versioning.\\
         Questo consente di cambiare le gestioni di basso livello lasciando invariato l'uso del programma agli occhi dell'utente.  
         
-        Dall'altra parte, di contro, la separazione degli elementi porta a una piccola duplicazione di quelle che sono le parti comuni tra il client e il server, come i modelli di dominio.
-        Per il tool aziendale precendente era stata adottata un'architettura diversa: un unico attore si occupava di consultare le reference e creare l'interfaccia grafica. 
+        Dall'altra parte, di contro, la separazione degli elementi porta a una piccola duplicazione di quelle che sono le parti comuni tra il client e il server, come i modelli di dominio.\\
+        Per il tool aziendale precendente era stata adottata un'architettura diversa: un unico attore si occupava di consultare le reference e creare l'interfaccia grafica. \\
         Questo sistema non \'e per\'o estensibile e riusabile come quello attuale, essendo la logica di dominio e la generazione della pagina eseguita dallo stesso componente.
