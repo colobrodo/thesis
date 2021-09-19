@@ -14,23 +14,30 @@
         Nonostante le SPA consistano in un solo file HTML hanno comunque la possibililtà di visualizzare documenti specifici in base al loro indirizzo corrente, grazie a un sistema chiamato \textit{Routing}. \\
         \subsection{Scelta dell'utilizzo}
             \'E stato scelto di usare Angular, perchè è un framework completo supportato da Google
-            ed \'e già stato usato precedentemente per lo sviluppo di altri applicativi.
+            ed \'e già stato usato precedentemente per lo sviluppo di altri applicativi.\\
             
-            Angular ha una struttura a componenti ovvero basici elementi grafici con una singola responsabilità che composti tra loro formano componenti più avanzati e la completa applicazione.
+            Angular ha una struttura a componenti ovvero basici elementi grafici con una singola responsabilità che composti tra loro formano componenti più avanzati e la completa applicazione.\\
             Questo stile strutturale consente il riuso del codice, per esempio, un componente sviluppato precedentemente consente
             di renderizzare un file CAD proprietario all'interno della pagina web.
         
         \subsection{Typescript}
-            Un altro motivo per la scelta di Angular è \href{https://www.typescriptlang.org}{Typescript}.
-            Typescript è un \textit{superset di javascript} cioè un'estensione che ne ingloba tutte le funzionalità e ne aggiunge altre.
+            Un altro motivo per la scelta di Angular è \cite{Typescript}
+            Typescript è un \textit{superset di javascript} cioè un'estensione che ne ingloba tutte le funzionalità e ne aggiunge altre.\\
             La sua peculiarità principale è l'aggiunta di uno step di compilazione che favorisce il controllo della correttezza del codice attraverso una tipizzazione statica.
     \section{Funzionalità}
-        La prima responsabilità dell'interfaccia web \'e rendere i test fruibili graficamente.
+        La prima responsabilità dell'interfaccia web \'e rendere i test fruibili graficamente.\\
         Ogni test \'e rappresentato da una scheda (in gergo \textit{card}) che contiene una lista di reference con un indicatore grafico del loro stato.\\
         \'E possibile visualizzare tutti i test o solo quelli con almeno una reference in errore.\\
         \subsection{visualizzazione dei test}        
-            Uno scopo del report \'e rendere pi\'u facile individuare i test in errore.
-            \'E perci\'o possibile filtrare i test in base al loro stato rendendo visualizzabili solo quelli con almeno una reference differente.
+            Uno scopo del report \'e rendere pi\'u facile individuare i test in errore.\\
+            \'E perci\'o possibile filtrare i test in base al loro stato rendendo visualizzabili solo quelli con almeno una reference differente.\\
+            Per rendere pi\'u intuibile l'utilizzo del programma viene visualizzata una pagina speciale nel caso non ci siano test con errori in modo che l'utente sappia che \'e andato tutto a buon fine.
+
+            \begin{figure}[h!]
+                \includegraphics[width=\textwidth]{images/no_error_page.png}
+                \caption{Pagina per suite senza errori}
+            \end{figure}
+
             Lo sviluppatore pu\'o anche nascondere le reference corrette all'interno di una card.\\
 
             \begin{figure}[h!]
@@ -38,8 +45,8 @@
                 \caption{Un esempio di visualizzazione di test}
             \end{figure}
 
-            Un ulteriore modo per togliere un test dalla vista \'e l'operazione di \textit{collapse}: essa consente di nascondere tutte le reference lasciando solamente il nome del test.
-            Con una specifica pagina di configurazione si pu\'o personalizzare il comportamento del programma in modo che tutte le card vengano collassate all'avvio dell'applicazione.
+            Un ulteriore modo per togliere un test dalla vista \'e l'operazione di \textit{collapse}: essa consente di nascondere tutte le reference lasciando solamente il nome del test.\\
+            Con una specifica pagina di configurazione si pu\'o personalizzare il comportamento del programma in modo che tutte le card vengano collassate all'avvio dell'applicazione.\\
             
             \begin{figure}[h!]
                 \includegraphics[width=\textwidth]{images/collpapsed.png}
@@ -57,26 +64,28 @@
             L'interfaccia web dispone una sezione per salvare le azioni e committarle.
             In un area specifica vengono visualizzate tutte le azioni, che possono essere annullate o definitivamente registrate.
             \begin{figure}[h!]
-                \includegraphics[width=\textwidth]{images/commit list.png}
+                \includegraphics[width=\textwidth]{images/commit_list.png}
                 \caption{L'area di stage premilinare}
             \end{figure}
         \subsection{Navigazione}
-            \'E disponibile un metodo di navigazione per aumentare l'usabilità dell'applicazione.
+            \'E disponibile un metodo di navigazione per aumentare l'usabilità dell'applicazione.\\
             Durante la navigazione è possibile rendere un test \textit{focussed} ed effettuare operazioni su esso usando delle scorciatoie da tastiera.\\
             Con il tasto \textbf{C} E' possibile rendere il test \textit{collapsed} o usando \textbf{S} mettere tutte le sue reference in area di stage.\\ 
-            Nello stesso modo si puo spostare il focus della navigazione sul prossimo elemento o su quello precedente, rispettivamente con \textbf{N}(next) o \textbf{B}(back).
-            Quando il focus si sposta su un nuovo test viene effettuata un operazione di scroll per includerlo nella parte visibile della pagina.
+            Nello stesso modo si puo spostare il focus della navigazione sul prossimo elemento o su quello precedente, rispettivamente con \textbf{N}(next) o \textbf{B}(back).\\
+            Quando il focus si sposta su un nuovo test viene effettuata un operazione di scroll per includerlo nella parte visibile della pagina.\\
+            
+            \begin{figure}[h!]
+                \includegraphics[width=\textwidth]{images/active.png}
+                \caption{Un test in stato di focus. La sua scheda relativa viene evidenziata e l'url della pagina viene modificato includendo il nome della risorsa.}
+            \end{figure}
+
             Lo stato della navigazione viene descritto nell'URL, scrivendo il nome dell'elemento in focus nella sezione denominata \textit{fragment}.\\
             Se la pagina viene richiesta con un fragment già impostato, in fase di rendering dei tests viene posto il focus automaticamente sul test con quel nome (in questo modo sar\'a visualizzabile gi\'a al caricamento della pagina).\\
             La gestione dei fragment rende condivisibile una risorsa primaria dell'applicazione quale il test indirizzandolo tramite un URL, come voluto dalla filosofia web. 
             
-            \begin{figure}[h]
-                \includegraphics[width=\textwidth]{images/active.png}
-                \caption{Un test in stato di focus. La sua scheda relativa viene evidenziata e l'url della pagina viene modificato includendo il nome della risorsa.}
-            \end{figure}
         \subsection{Impostazioni grafiche}
-            \'E possibile personalizzare il comportamento dell'applicazione usando una pagina di impostazioni.
-            Questi settaggi sono specifici all'utente e salvati in locale in modo persistente.
+            \'E possibile personalizzare il comportamento dell'applicazione usando una pagina di impostazioni.\\
+            Questi settaggi sono specifici all'utente e salvati in locale in modo persistente.\\
             Le configurazioni disponibili consistono in:
             \begin{itemize}
                 \item Visualizzare solo i test in errore quando si visualizza una suite.
@@ -85,8 +94,8 @@
             \end{itemize}
             Le impostazioni consentono di modificare il layout grafico dell'applicazione e favorire la ricerca dei test errati a seconda delle esigenze specifiche dello sviluppatore e della struttura della suite.
     \section{Interazione con gli altri tool aziendali}
-        La consultazione delle differenze viene delegata a un tool aziendale già sviluppato in precedenza, denominato \textit{Differ}.
-        Anch'esso \'e un tool web quindi questa integrazione avviene  costruendo un URI per navigare nella pagina successiva.
-        Il processo di esecuzione dei test di occupa di salvare i risultati di ogni sessione di test e rendere i risultati disponibili tramite Differ mantenendo dunque una cronologia.
-        Il report in oggetto, invece produce un interfaccia in tempo reale basata lo stato del server.
-        Per sincronizzare lo stato tra i due sistemi \'e necessario recuperare l'ultima sessione di test eseguita e, per ogni reference, creare un url che associ il test con le sue differenze.
+        La consultazione delle differenze viene delegata a un tool aziendale già sviluppato in precedenza, denominato \textit{Differ}.\\
+        Anch'esso \'e un tool web quindi questa integrazione avviene  costruendo un URI per navigare nella pagina successiva.\\
+        Il processo di esecuzione dei test di occupa di salvare i risultati di ogni sessione di test e rendere i risultati disponibili tramite Differ mantenendo dunque una cronologia.\\
+        Il report in oggetto, invece produce un interfaccia in tempo reale basata lo stato del server.\\
+        Per sincronizzare lo stato tra i due sistemi \'e necessario recuperare l'ultima sessione di test eseguita e, per ogni reference, creare un url che associ il test con le sue differenze.\\

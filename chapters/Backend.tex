@@ -1,5 +1,5 @@
 \chapter{Backend}
-        Il backend è stato sviluppato in \href{https://www.python.org}{Python} usando il framework \href{https://flask.palletsprojects.com/en/1.1.x/}{Flask}.
+        Il backend è stato sviluppato in \href{https://www.python.org}{Python} usando il framework \href{https://flask.palletsprojects.com/en/1.1.x/}{Flask}.\\
         \'E stato scelto Python perchè è un linguaggio già usato internamente per lo sviluppo di plugin e tool interni.
 
         \section{Specifica e documentazione}
@@ -31,7 +31,7 @@
                 tramite l'utilizzo di diverse cli\footnote{Command Line Interface}.\\
                 Io ho scelto ReDoc, perchè mette a disposizione diverse vendore-extension, cioè sezioni che
                 se specificate provedono una maggiore customizzazione della pagina generata.\\
-                Queste estensioni sono state usate per sezioni di codice di esempio riguardo a come effettuare una chiamata al server, e per aggiungere riferimenti a file markdown esterni da includere nella documentazione.
+                Queste estensioni sono state usate per sezioni di codice di esempio riguardo a come effettuare una chiamata al server, e per aggiungere riferimenti a file markdown esterni da includere nella documentazione.\\
                 
                 \begin{figure}[h]
                     \includegraphics[width=\textwidth]{images/documentation.png}
@@ -50,6 +50,7 @@
         \subsection{Python}
             Python \'e un linguaggio di scripting, interpretato ad alto livello, ovvero la gestione della memoria viene effettuata da un sistema di garbage collection e non delegata allo sviluppatore.\\
             Questo linguaggio è stato scelto siccome \'e usato per lo scripting all'interno di altri applicativi esistenti e dunque gi\'a familiare a molti sviluppatori.\\
+            
             Tra le varie librerie prodotte \'e presente anche un modulo per lanciare i test e inviare i risultati agli sviluppatori via e-mail.\\
             Questo modulo non è stato utilizzato all'interno del test report ma l'uso dello stesso linguaggio ha contribuito a mantenere la code-base pi\'u uniforme.
         \subsection{Flask}  
@@ -64,7 +65,7 @@
         Un sistema di controllo di versione è un software distribuito che si occupa di tenere traccia di tutti i cambiamenti effettuati su un progetto.\\
         Lo sviluppatore dopo ogni modifica si occuperà di registrarla nel sistema, creando quello che viene definito un commit.\\
         Questi software consentono di ripristinare versioni precedenti e avere uno storico dei cambiamenti effettuati.\\
-        Le tests suite sono revisionate con un sistema di versioning.
+        Le tests suite sono revisionate con un sistema di versioning.\\
         
         L'API oltre alla modifica, aggiunta o rimozione dei test si occupa anche di versionare queste azioni nel sistema usato dalla suite.\\
         Internamente vengono usati sia \textbf{GIT} che \textbf{SubVersion (SVN)} e una specifica del report è supportare entrambi in modo trasparente allo sviluppatore.\\
@@ -88,7 +89,7 @@
             \item \textbf{DELETE} per eliminare una risorsa
         \end{itemize}
         
-        il server risponderà con un pacchetto HTTP composto da uno status code e un corpo contente il risultato dell'operazione.
+        il server risponderà con un pacchetto HTTP composto da uno status code e un corpo contente il risultato dell'operazione.\\
         lo status code è un codice di 3 cifre che descrive se l'operazione è andata a buon fine o il tipo di errore (per esempio: risorsa non trovata, utente non autorizzato ecc...)
         
         Nel nostro caso gli indirizzi delle risorse sono stati così creati: 
@@ -98,10 +99,12 @@
             \item \textbf{Reference} \verb|/easywood/doh2hw527jm/64bit|
         \end{itemize}
         
-        Ogni API definisce una semantica specifica per le sue operazioni.
-        Nel nostro caso non ogni metodo è stato definito dal servizio, perché altre operazioni come la creazione di un test o una suite esulano dalle responsabilità dell'applicazione.
-        Per i test è disponibile il metodo GET per  ottenerne il nome, il path relativo e le sue reference.
-        Ognuna di esse è composta da stato di errore e di stato di registrazione nel sistema (registrato, modificato o non registrato).
-        Per le reference sono disponibili anche i metodi PUT e DELETE. PUT è per definizione da specifica di REST idempotente e si occupa della modifica di una risorsa, percio nel nostro caso registra nel sistema le eventuali modifiche/differenze ottenute durante la sessione di test, se la reference si trova in stato di errore essa verrà sostituita dal suo file current, altrimenti se non è in errore o è già stata modificata non verrà effettuata alcuna operazione.
-        I soggetti dell'API sono le operazioni di registrazione dei test, perciò l'operazione di DELETE assume la semantica di "undo", ovvero ripristino dello stato del sistema all'ultima configurazione registrata nel controllo di versione.
+        Ogni API definisce una semantica specifica per le sue operazioni.\\
+        Nel nostro caso non ogni metodo è stato definito dal servizio, perché altre operazioni come la creazione di un test o una suite esulano dalle responsabilità dell'applicazione.\\
+        
+        Per i test è disponibile il metodo GET per  ottenerne il nome, il path relativo e le sue reference.\\
+        Ognuna di esse è composta da stato di errore e di stato di registrazione nel sistema (registrato, modificato o non registrato).\\
+        Per le reference sono disponibili anche i metodi PUT e DELETE. PUT è per definizione da specifica di REST idempotente e si occupa della modifica di una risorsa, percio nel nostro caso registra nel sistema le eventuali modifiche/differenze ottenute durante la sessione di test, se la reference si trova in stato di errore essa verrà sostituita dal suo file current, altrimenti se non è in errore o è già stata modificata non verrà effettuata alcuna operazione.\\
+        
+        I soggetti dell'API sono le operazioni di registrazione dei test, perciò l'operazione di DELETE assume la semantica di "undo", ovvero ripristino dello stato del sistema all'ultima configurazione registrata nel controllo di versione.\\
         

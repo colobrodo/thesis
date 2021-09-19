@@ -4,9 +4,12 @@
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage{setspace}
+\usepackage{biblatex}
 \usepackage[paper=a4paper,margin=1in]{geometry}
 \usepackage[italian]{babel}
 \usepackage{fancyhdr}
+
+\addbibresource{bibliography.bib}
 
 \preto{\section}{\filbreak}
 
@@ -96,5 +99,9 @@
     \input{chapters/Sviluppi_futuri.tex}
 
     \input{chapters/Conclusione.tex}
+
+
+    \printbibliography 
+
+
 \end{document}
-            

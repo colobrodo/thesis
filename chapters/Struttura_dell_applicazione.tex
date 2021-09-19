@@ -1,34 +1,34 @@
 \chapter{Struttura dell'applicazione}
-    L'applicazione \'e stata sviluppata seguendo un'architettura client-server.
+    L'applicazione \'e stata sviluppata seguendo un'architettura client-server.\\
     
     Questa infrastruttura è composta da diversi programmi che interagiscono tra loro usando messaggi di rete, nel nostro caso codificati secondo il protocollo HTTP.
-    Comunemente, le componenti principali sono il backend e il frontend.    
+    Comunemente, le componenti principali sono il backend e il frontend.\\
 
     \section{Elementi dell'applicazione}
-        La prima componente di \textit{backend} si occupa della parte di logica di dominio dell'applicazione.
+        La prima componente di \textit{backend} si occupa della parte di logica di dominio dell'applicazione.\\
         La seconda, denominata \textit{frontend}, rappresenta graficamente i dati e di rende le interazioni tra essi gli stessi e l'utente fruibili.
-        Decuplicare le parti dell'applicazione consente di rendere i singoli componenti riusabili.
+        Decuplicare le parti dell'applicazione consente di rendere i singoli componenti riusabili.\\
 
         L'esempio pi\'u comune consiste nel condividere la logica dell'applicazione usando un backend e multiple rappresentazioni grafiche a seconda della piattaforma di utilizzo.
         In questo modo si può creare a un'applicazione web o un app mobile, senza duplicare la logica di dominio che verrà gestita dell'altra componente.
         
-        Nel nostro caso in esame, la parte di backend si occuperà di leggere i test da file system e di esporli tramite un API.
-        \'E stato sviluppato un frontend web per interagire graficamente con i test.
+        Nel nostro caso in esame, la parte di backend si occuperà di leggere i test da file system e di esporli tramite un API.\\
+        \'E stato sviluppato un frontend web per interagire graficamente con i test.\\
 
     \section{Intercomunicazione tra gli elementi}
-        La comunicazione avviene tramite messaggi di rete codificati secondo il protocollo HTTP.
-        La condivisione del protocollo consente agli attori di comunicare senza conoscere i dettagli implementativi dell'altro.
-        Ci\'o implica un ulteriore vantaggio: gli elementi possono essere eseguiti su piattaforme diverse o essere scritti in linguaggi differenti, a seconda delle diverse necessità del singolo componente.
+        La comunicazione avviene tramite messaggi di rete codificati secondo il protocollo HTTP.\\
+        La condivisione del protocollo consente agli attori di comunicare senza conoscere i dettagli implementativi dell'altro.\\
+        Ci\'o implica un ulteriore vantaggio: gli elementi possono essere eseguiti su piattaforme diverse o essere scritti in linguaggi differenti, a seconda delle diverse necessità del singolo componente.\\
         
-        Per il caso in oggetto la comunicazione viene iniziata dall'applicazione web e l'API REST si occupa di rispondere alle richieste.
+        Per il caso in oggetto la comunicazione viene iniziata dall'applicazione web e l'API REST si occupa di rispondere alle richieste.\\
         Il formato di interscambio dei dati usato \'e \textit{JSON}.
 
     \section{Vantaggi, svantaggi dell'architettura e alternative}
-        I vantaggi di questa architettura, come precedentemente detto, sono la decuplicazione dei diversi elementi, il loro riutilizzo e la separazione delle responsabilità.
+        I vantaggi di questa architettura, come precedentemente detto, sono la decuplicazione dei diversi elementi, il loro riutilizzo e la separazione delle responsabilità.\\
         
         In un caso futuro, sarà possibile sviluppare un altro frontend per visualizzare i test su un altra piattaforma riutilizzando il backend e garantendo la stessa logica applicativa.\\
         Viceversa la parte di frontend non conosce i dettagli implementativi usati dal backend come la gestione delle reference tramite file system e il sistema di versioning.\\
-        Questo consente di cambiare le gestioni di basso livello lasciando invariato l'uso del programma agli occhi dell'utente.  
+        Questo consente di cambiare le gestioni di basso livello lasciando invariato l'uso del programma agli occhi dell'utente.\\  
         
         Dall'altra parte, di contro, la separazione degli elementi porta a una piccola duplicazione di quelle che sono le parti comuni tra il client e il server, come i modelli di dominio.\\
         Per il tool aziendale precendente era stata adottata un'architettura diversa: un unico attore si occupava di consultare le reference e creare l'interfaccia grafica. \\
