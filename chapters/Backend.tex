@@ -68,6 +68,10 @@
         Le tests suite sono revisionate con un sistema di versioning.\\
         
         L'API oltre alla modifica, aggiunta o rimozione dei test si occupa anche di versionare queste azioni nel sistema usato dalla suite.\\
+        Per sapere quali sono le modifiche alla suite effettuate, il servizio si avvale di \textit{staging area}. \\
+        Sono aree intermedie salvate in locale che consentono di formattare e rivedere le modifiche prima di creare il commit.\\
+        La creazione del commit avviene tramite un endpoint specifico. \\
+
         Internamente vengono usati sia \cite{Git} che \cite{SubVersion} (SVN) e una specifica del report è supportare entrambi in modo trasparente allo sviluppatore.\\
         Questa funzionalità nasce da una necessità futura di effettuare una migrazione delle test suite revisionate attualmente con SVN a GIT.\\
             
