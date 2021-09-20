@@ -1,5 +1,5 @@
 \chapter{Backend}
-        Il backend è stato sviluppato in \href{https://www.python.org}{Python} usando il framework \href{https://flask.palletsprojects.com/en/1.1.x/}{Flask}.\\
+        Il backend è stato sviluppato in \cite{Python} usando il framework \cite{Flask}.\\
         \'E stato scelto Python perchè è un linguaggio già usato internamente per lo sviluppo di plugin e tool interni.
 
         \section{Specifica e documentazione}
@@ -12,7 +12,7 @@
             Questa specifica come vedremo in seguito è servita anche a produrre automaticamente una pagina di documentazione (\ref{apidoc}).
             
             \subsection{Specifica in linguaggio OpenAPI\label{openapi}}
-                La Specifica dell'API è stata scritta in formato OpenAPI.\\
+                La Specifica dell'API è stata scritta in formato \cite{OpenAPI}.\\
                 Questo file può essere scritto in linguaggio JSON o YML, io ho scelto il secondo perchè
                 sintatticamente più leggero e usa l'indentazione per separare le sezioni, facilitandone dunque la scrittura. \\
                 Questo formato ci consente di descrivere tutte le chiamate che il server 
@@ -72,39 +72,38 @@
         Questa funzionalità nasce da una necessità futura di effettuare una migrazione delle test suite revisionate attualmente con SVN a GIT.\\
             
     \section{Struttura dell'API}
-        Nel processo di design dell'API si è scelto di adottare i principi architetturali REST.\\
+        Nel processo di design dell'API si è scelto di adottare i principi architetturali \cite{REST}.\\
         Il primo punto di questa filosofia consiste nel poter assegnare un indirizzo (detto \textit{URI} ovvero \textit{Unique Resource Identifier}) a ogni risorsa dell'applicazione.\\
         L'URI deve essere univoco e descrittivo riguardo al tipo di risorsa che si sta richiedendo.\\
+        
         La comunicazione si basa sul protocollo HTTP e coinvolge due tipi di attori chiamati client e server.\\
         Il server si occupa di esporre l'API e i client di effettuare una serie di richieste per manipolare le risorse a seconda delle loro necessità.\\
         Ogni messaggio scambiato tra i client e il server si occupa di effettuare una singola operazione su un oggetto.\\
-        La richiesta è composta da un URI, che  indica il soggetto e un metodo che descrive quale azione compiere.\\
+        La richiesta è composta da un metodo che descrive quale azione compiere, e un URI che indica il soggetto.\\
+        
+        Ogni URI \'e composto da diverse sezioni, tra esse il \textit{path} che definisce una collocazione logica della risorsa all'interno dell'applicazione.\\
+        Gli indirizzi delle risorse sono creati ragruppando quelli che hanno informazioni associate.\\
+        Per esempio se si vuole accedere a un test viene identificata prima la suite di appartenenza e poi l'id del test: \verb|/easywood/doh2hw527jm|.\\
+        Per riferirsi alle reference invece ci si riferisce al test di appartenenza e successivamente viene specificata la distribuzione, in questo modo: \verb|/easywood/doh2hw527jm/64bit|.\\
+        
         I metodi principali sono:
         
         \begin{itemize}
             \item \textbf{GET} per ottenere le informazioni relative a una risorsa
             \item \textbf{POST} per la creazione di nuove risorse
-
             \item \textbf{PUT} si riferisce alla modifica di elementi già presenti nel sistema
             \item \textbf{DELETE} per eliminare una risorsa
-        \end{itemize}
-        
-        il server risponderà con un pacchetto HTTP composto da uno status code e un corpo contente il risultato dell'operazione.\\
-        lo status code è un codice di 3 cifre che descrive se l'operazione è andata a buon fine o il tipo di errore (per esempio: risorsa non trovata, utente non autorizzato ecc...)
-        
-        Nel nostro caso gli indirizzi delle risorse sono stati così creati: 
-        \begin{itemize}
-            \item \textbf{Suite} \verb|/easywood|
-            \item \textbf{Test} \verb|/easywood/doh2hw527jm|
-            \item \textbf{Reference} \verb|/easywood/doh2hw527jm/64bit|
         \end{itemize}
         
         Ogni API definisce una semantica specifica per le sue operazioni.\\
         Nel nostro caso non ogni metodo è stato definito dal servizio, perché altre operazioni come la creazione di un test o una suite esulano dalle responsabilità dell'applicazione.\\
         
-        Per i test è disponibile il metodo GET per  ottenerne il nome, il path relativo e le sue reference.\\
+        Per i test è disponibile il metodo GET per ottenerne il nome, il path relativo e le sue reference.\\
         Ognuna di esse è composta da stato di errore e di stato di registrazione nel sistema (registrato, modificato o non registrato).\\
         Per le reference sono disponibili anche i metodi PUT e DELETE. PUT è per definizione da specifica di REST idempotente e si occupa della modifica di una risorsa, percio nel nostro caso registra nel sistema le eventuali modifiche/differenze ottenute durante la sessione di test, se la reference si trova in stato di errore essa verrà sostituita dal suo file current, altrimenti se non è in errore o è già stata modificata non verrà effettuata alcuna operazione.\\
         
         I soggetti dell'API sono le operazioni di registrazione dei test, perciò l'operazione di DELETE assume la semantica di "undo", ovvero ripristino dello stato del sistema all'ultima configurazione registrata nel controllo di versione.\\
+        
+        il server risponderà con un pacchetto HTTP composto da uno status code e un corpo contente il risultato dell'operazione.\\
+        lo status code è un codice di 3 cifre che descrive se l'operazione è andata a buon fine o il tipo di errore (per esempio: risorsa non trovata, utente non autorizzato ecc...).\\
         
