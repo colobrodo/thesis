@@ -1,5 +1,5 @@
 \chapter{Backend}
-        Il backend è stato sviluppato in \cite{Python} usando il framework \cite{Flask}.\\
+        Il backend è stato sviluppato in Python \cite{Python} usando il framework Flask \cite{Flask}.\\
         \'E stato scelto Python perchè è un linguaggio già usato internamente per lo sviluppo di plugin e tool interni.
 
         \section{Specifica e documentazione}
@@ -12,23 +12,23 @@
             Questa specifica come vedremo in seguito è servita anche a produrre automaticamente una pagina di documentazione (\ref{apidoc}).
             
             \subsection{Specifica in linguaggio OpenAPI\label{openapi}}
-                La Specifica dell'API è stata scritta in formato \cite{OpenAPI}.\\
+                La Specifica dell'API è stata scritta in formato OpenAPI \cite{OpenAPI}.\\
                 Questo file può essere scritto in linguaggio JSON o YML, io ho scelto il secondo perchè
                 sintatticamente più leggero e usa l'indentazione per separare le sezioni, facilitandone dunque la scrittura. \\
                 Questo formato ci consente di descrivere tutte le chiamate che il server 
                 mette a disposizione, specificando:
                 \begin{itemize}
-                    \item il formato dell'URI 
-                    \item il metodo
-                    \item il formato di interscampio dei dati (json, xml ecc) 
-                    \item la struttura della risposta
-                    \item come deve essere strutturata la richiesta perch\'e essa sia valida
-                        \item i codici di errori e la loro semantica specifica nel contesto dell'applicazione
+                    \item Il formato dell'URI 
+                    \item Il metodo
+                    \item Il formato di interscampio dei dati (json, xml ecc) 
+                    \item La struttura della risposta
+                    \item Come deve essere strutturata la richiesta perch\'e essa sia valida
+                    \item I codici di errori e la loro semantica specifica nel contesto dell'applicazione
                 \end{itemize}
                 
             \subsection{Documentazione\label{apidoc}}
                 Inoltre da questa specifica è possibile generare la documentazione, in pagina statica html,
-                tramite l'utilizzo di diverse cli\footnote{Command Line Interface}.\\
+                tramite l'utilizzo di diverse CLI\footnote{\textbf{Command Line Interface} - Interfaccia a linea di comando}.\\
                 Io ho scelto ReDoc, perchè mette a disposizione diverse vendore-extension, cioè sezioni che
                 se specificate provedono una maggiore customizzazione della pagina generata.\\
                 Queste estensioni sono state usate per sezioni di codice di esempio riguardo a come effettuare una chiamata al server, e per aggiungere riferimenti a file markdown esterni da includere nella documentazione.\\
@@ -72,11 +72,11 @@
         Sono aree intermedie salvate in locale che consentono di formattare e rivedere le modifiche prima di creare il commit.\\
         La creazione del commit avviene tramite un endpoint specifico. \\
 
-        Internamente vengono usati sia \cite{Git} che \cite{SubVersion} (SVN) e una specifica del report è supportare entrambi in modo trasparente allo sviluppatore.\\
-        Questa funzionalità nasce da una necessità futura di effettuare una migrazione delle test suite revisionate attualmente con SVN a GIT.\\
+        Internamente vengono usati sia Git \cite{Git} che SubVersion (SVN) \cite{SubVersion} e una specifica del report è supportare entrambi in modo trasparente allo sviluppatore.\\
+        Questa funzionalità nasce da una necessità futura di effettuare una migrazione delle test suite revisionate attualmente con Svn a Git.\\
             
     \section{Struttura dell'API}
-        Nel processo di design dell'API si è scelto di adottare i principi architetturali \cite{REST}.\\
+        Nel processo di design dell'API si è scelto di adottare i principi architetturali REST \cite{REST}.\\
         Il primo punto di questa filosofia consiste nel poter assegnare un indirizzo (detto \textit{URI} ovvero \textit{Unique Resource Identifier}) a ogni risorsa dell'applicazione.\\
         L'URI deve essere univoco e descrittivo riguardo al tipo di risorsa che si sta richiedendo.\\
         
@@ -93,10 +93,10 @@
         I metodi principali sono:
         
         \begin{itemize}
-            \item \textbf{GET} per ottenere le informazioni relative a una risorsa
-            \item \textbf{POST} per la creazione di nuove risorse
-            \item \textbf{PUT} si riferisce alla modifica di elementi già presenti nel sistema
-            \item \textbf{DELETE} per eliminare una risorsa
+            \item \textbf{GET} Per ottenere le informazioni relative a una risorsa
+            \item \textbf{POST} Per la creazione di nuove risorse
+            \item \textbf{PUT} Si riferisce alla modifica di elementi già presenti nel sistema
+            \item \textbf{DELETE} Per eliminare dati
         \end{itemize}
         
         Ogni API definisce una semantica specifica per le sue operazioni.\\
@@ -108,6 +108,6 @@
         
         I soggetti dell'API sono le operazioni di registrazione dei test, perciò l'operazione di DELETE assume la semantica di "undo", ovvero ripristino dello stato del sistema all'ultima configurazione registrata nel controllo di versione.\\
         
-        il server risponderà con un pacchetto HTTP composto da uno status code e un corpo contente il risultato dell'operazione.\\
-        lo status code è un codice di 3 cifre che descrive se l'operazione è andata a buon fine o il tipo di errore (per esempio: risorsa non trovata, utente non autorizzato ecc...).\\
+        Il server risponderà con un pacchetto HTTP composto da uno status code e un corpo contente il risultato dell'operazione.\\
+        Lo status code è un codice di 3 cifre che descrive se l'operazione è andata a buon fine o il tipo di errore (per esempio: risorsa non trovata, utente non autorizzato ecc...).\\
         

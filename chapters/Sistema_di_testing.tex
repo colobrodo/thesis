@@ -21,15 +21,15 @@
 
         Ogni test consiste in:
         \begin{itemize}
-            \item un file CAD di partenza
-            \item dei file per descrivere una configurazione specifica di un determinato cliente
-            \item un file scl (linguaggio di scripting proprietario) o un file python
-            \item uno o pi\'u riferimenti (file .reference)
+            \item Un file CAD di partenza
+            \item Dei file per descrivere una configurazione specifica di un determinato cliente
+            \item Un file SCL \footnote{\textbf{Sculptor Common Language} \'e un linguaggio di scripting proprietario interpretato con un insieme di routine per il disegno e la manifattura dei materiali} o un file python
+            \item Uno o pi\'u riferimenti (file .reference)
         \end{itemize}
 
     \section{Ciclo di vita del test}
         Il software, per lanciare un test, importa il file CAD e le configurazioni del cliente.\\
-        Successivamente esegue lo script SCL\footnote{\textbf{Sculptor Common Language} \'e un linguaggio di scripting proprietario interpretato con un insieme di routine per il disegno e la manifattura dei materiali} o Python, che con opportune librerie, si interfaccia con il software
+        Successivamente esegue lo script SCL o Python, che con opportune librerie, si interfaccia con il software
         e simula le operazioni utente. \\
         
         Tra le diverse routine alcune si occupano di creare le reference esportando un risultato parziale dal programma come uno screenshot, un gruppo di entit\'a geometriche o un file testuale.
