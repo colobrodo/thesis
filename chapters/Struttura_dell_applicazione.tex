@@ -31,5 +31,15 @@
         Questo consente di cambiare le gestioni di basso livello lasciando invariato l'uso del programma agli occhi dell'utente.\\  
         
         Dall'altra parte, di contro, la separazione degli elementi porta a una piccola duplicazione di quelle che sono le parti comuni tra il client e il server, come i modelli di dominio.\\
+
+        Prima dello sviluppo era gi\'a presente un tool web a supporto della fase di analisi e accettazione dei test.\\
+        Questo strumento aveva per\'o le seguenti limitazioni:\\
+            \begin{itemize}
+                \item Il sistema di versione GIT non è supportato.
+                \item il tool è svilupparto con tecnologie di rendering server-side e ogni operazione richiede il ricaricamento della pagina e di conseguenza l'intera scansione della test suite.
+                \item Il rendering server side non rendeva disponibili esternamente le informazioni riguardo hai test.
+                \item L'interfaccia grafica non \'e interattiva e non è possibile nascondere o filtrare i test.
+            \end{itemize}
+
         Per il tool aziendale precendente era stata adottata un'architettura diversa: un unico attore si occupava di consultare le reference e creare l'interfaccia grafica. \\
         Questo sistema non \'e per\'o estensibile e riusabile come quello attuale, essendo la logica di dominio e la generazione della pagina eseguita dallo stesso componente.
