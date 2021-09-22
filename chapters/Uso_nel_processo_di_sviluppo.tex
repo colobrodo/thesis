@@ -9,7 +9,7 @@
 
         In fase di sviluppo del report vengono usati due processi, uno per il frontend e uno per il backend, che comunicano tra loro tramite messaggi HTTP.\\
         Questa gestione è diversa in fase di produzione siccome il processo che serve la parte frontend si occupa di ricaricare la pagina quando occorre una modifica sui file del progetto angular, in modo da mostrare le modifiche in modo interattivo allo sviluppatore.\\
-        Per l'interfaccia web viene dunque effettuata una fase detta di "bundling", dove i diversi file  vengono compilati in file statici (JS, HTML e CSS).\\
+        Per l'interfaccia web viene dunque effettuata una fase detta di "bundling", dove i diversi file  vengono compilati in file statici (JavaScript \cite{JS}, HTML \cite{HTML} e CSS \cite{CSS}).\\
         Vengono esposte entrambe le parti dell'applicazione sulla stessa porta grazie al sistema di routing.\\
         Tutti gli indirizzi relativi all'API sono stati spostati nella sottoroute \verb|/v1|.\\
         Per le altre richieste viene controllato se esiste un file statico con lo stesso percorso altrimenti viene servito il file HTML principale in modo da delegare la segnalazione di errori o visualizzazione di pagine specifiche al sistema di routing usata dalla Single Page Application.\\
